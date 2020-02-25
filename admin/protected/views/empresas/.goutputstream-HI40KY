@@ -1,0 +1,19 @@
+
+<div class="titulo"> Buscar&nbsp;Empresa</div>
+
+
+<?php $this->widget('zii.widgets.grid.CGridView', array(
+	'id'=>'empresa-grid',
+	'dataProvider'=>$model->search(),
+	'filter'=>$model,
+	'columns'=>array(
+		'nombre',
+		'codigo',
+		'cuit',
+		'inicio_actividad',
+		'razon_social',
+		array(
+			'class'=>'CButtonColumn',
+		),
+	),
+)); ?>

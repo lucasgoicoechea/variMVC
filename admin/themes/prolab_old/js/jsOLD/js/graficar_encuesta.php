@@ -1,0 +1,142 @@
+<?php
+require_once "../../../includes/conexion.php";
+//echo '<div style="width: 900px; margin: 20px auto; font-family:sans-serif;">';
+//obtengo la cantidad total de respuestas para esa pregunta
+$qCantRespuestas = $link->query("SELECT count(*) as cantResp FROM answers_selected au, answers a where au.id_respuesta = a.id AND a.id_pregunta = '".$_GET['id_pregunta']."'");
+$queryCantResp = $qCantRespuestas->fetchRow(DB_FETCHMODE_ASSOC);
+$total = $queryCantResp['cantResp'];
+
+//Obtenemos el numero de votos de cada opcion y los metemos en "votos[]"
+$consulta="SELECT a.*, q.pregunta FROM questions q, answers a WHERE q.id='".$_GET['id_pregunta']."' and a.id_pregunta = q.id ";
+$Qrespuesta = $link->query($consulta);
+//echo $consulta;
+$strNombres = '';
+$strRespuestas = 'categories: [';
+$cantidadRespuestas = '';
+while ($respuesta = $Qrespuesta -> fetchRow(DB_FETCHMODE_ASSOC)){
+  //Guardamos el texto en la variable temp. Este texto nos servirá como 
+	//índice en el array votos[]
+  $temp = $respuesta['descripcion'];
+  $strRespuestas .= "'".$respuesta['descripcion']."',";  
+  $qCantRespuestas = $link->query("SELECT count(*) as cantResp FROM answers_selected au where au.id_respuesta = ".$respuesta['id']);
+  $queryCantResp = $qCantRespuestas->fetchRow(DB_FETCHMODE_ASSOC);
+  $votos[$temp]= $queryCantResp['cantResp'];
+  $cantidadRespuestas .= $queryCantResp['cantResp'].',';
+  $titulo= $respuesta['pregunta'];
+  $strPreguntas .= $respuesta['pregunta'].',';  
+  }
+$cantidadRespuestas = substr($cantidadRespuestas, 0, -1);
+$strRespuestas = substr($strRespuestas, 0, -1);
+$strRespuestas .= ']';
+?>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>	
+		
+		
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+		<script type="text/javascript" src="./js/highcharts.js"></script>
+		<!--[if IE]>
+			<script type="text/javascript" src="./js/excanvas.compiled.js"></script>
+		<![endif]-->
+		
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script type="text/javascript">
+		var chart;
+		$(document).ready(function() {
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'container'
+				},
+				title: {
+<?php
+					echo "text: '".$titulo."'";
+?>
+				},
+				xAxis: {
+<?php
+					echo $strRespuestas;
+?>
+					
+				},
+				tooltip: {
+					formatter: function() {
+						var s;
+						if (this.point.name) { // the pie chart
+							s = '<b>Total fruit consumption</b><br/>'+
+								this.point.name +': '+ this.y +' fruits';
+						} else {
+							s = '<b>'+ this.series.name +'</b><br/>'+
+								this.x  +': '+ this.y;
+						}
+						return s;
+					}
+				},
+				labels: {
+					items: [{
+						html: 'Total fruit consumption',
+						style: {
+							left: '40px',
+							top: '8px',
+							color: 'black'				
+						}
+					}]
+				},
+				series: [{
+					type: 'column',
+					name: 'Jane',
+					data: [3, 2, 1, 3, 4]
+				}, {
+					type: 'column',
+					name: 'John',
+					data: [2, 3, 5, 7, 6]
+				}, {
+					type: 'column',
+					name: 'Joe',
+					data: [4, 3, 3, 9, 0]
+				}, {
+					type: 'spline',
+					name: 'Average',
+					data: [3, 2.67, 3, 6.33, 3.33]
+				}, {
+					type: 'pie',
+					name: 'Total consumption',
+					data: [{
+						name: 'Jane',
+						y: 13,
+						color: '#4572A7' // Jane's color
+					}, {
+						name: 'John',
+						y: 23,
+						color: '#AA4643' // John's color
+					}, {
+						name: 'Joe',
+						y: 19,
+						color: '#89A54E' // Joe's color
+					}],
+					center: [100, 80],
+					size: 100,
+					showInLegend: false
+				}]
+			});
+			
+			
+		});
+		</script>
+		
+	<script type="text/javascript" src="http://www.highcharts.com/highslide/highslide-full.min.js"></script>
+<script type="text/javascript" src="http://www.highcharts.com/highslide/highslide.config.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="http://www.highcharts.com/highslide/highslide.css" />
+</head>
+	<body>
+		
+		<!-- 3. Add the container
+		<div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>  -->
+		<div id="container" class="highcharts-container" style="height:410px; width: 800px; margin: 0 auto; clear:both"></div>
+
+				
+	</body>
+</html>

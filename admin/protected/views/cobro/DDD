@@ -1,0 +1,169 @@
+
+		<div class="contenedor-fila">
+				
+			<div class="contenedor-columna-20">
+			<?php echo $form->labelEx($modelItem,'Fecha'); ?>
+			<?php
+			
+			$this->widget ( 'zii.widgets.jui.CJuiDatePicker', array (
+					'model' => '$modelItem',
+					'name' => 'CobroItem[Fecha]',
+					'language' => 'es',
+					'value' => LGHelper::functions()->displayFecha($modelItem->Fecha != null ? $modelItem->Fecha : CTimestamp::formatDate ( 'Y-m-d' )),
+					'htmlOptions' => array (
+							'size' => 10,
+							'style' => 'width:100px !important' 
+					),
+					'options' => array (
+							'showButtonPanel' => true,
+							'changeYear' => true,
+							'changeYear' => true,
+					) 
+			) );
+			;
+			?>
+		<?php echo $form->error($modelItem,'Fecha'); ?>
+		</div>
+		
+		</div>
+		<div class="contenedor-fila" >
+		<div class="contenedor-columna-40">
+		<?php echo $form->labelEx($modelItem,'Importe'); ?>
+        <?php
+        $this->widget('application.extensions.moneymask.MMask',array(
+                'element'=>'#CobroItem_Importe',
+                'currency'=>'PHP',
+                'config'=>array(
+                        'symbolStay'=>true,
+                        'thousands'=>'.',
+                        'decimal'=>',',
+                        'precision'=>2,
+                )
+        ));
+        echo $form->textField($modelItem,'Importe',['id'=>'CobroItem_Importe']); 
+        ?>
+        <?php echo $form->error($modelItem,'Importe'); ?>
+	</div>
+    <div class="contenedor-fila">
+		<div class="contenedor-columna-20">
+		<?php echo $form->labelEx($modelItem,'FechaCobro'); ?>
+    <?php
+
+            
+    $this->widget ( 'zii.widgets.jui.CJuiDatePicker', array (
+                    'model' => '$modelItem',
+                    'name' => 'CobroItem[FechaCobro]',
+    'language' => 'es',
+                    'value' => $modelItem->FechaCobro!=null?LGHelper::functions()->displayFecha($modelItem->FechaCobro):'',
+                    'htmlOptions' => array (
+                            'size' => 10,
+                            'style' => 'width:100px !important' 
+                    ),
+                    'options' => array (
+                            'showButtonPanel' => true,
+                            'changeYear' => true,
+                            'changeYear' => true,
+                    
+                    ) 
+            ) );
+            ;
+            ?>
+    <?php echo $form->error($modelItem,'FechaCobro'); ?>
+        </div>
+	
+	<div class="contenedor-columna-30">
+			<label for="Imputacion">Tipo de Cobro</label><?php
+			$this->widget ( 'application.components.Relation', array (
+					'model' => $modelItem,
+					'relation' => 'imputacion',
+					'fields' => 'Nombre',
+					'allowEmpty' => false,
+					'style' => 'dropdownlist',
+					'showAddButton' => false 
+			) );
+			?>
+			</div>
+		<div class="contenedor-columna-30">
+			<label for="FormaPago">Forma de Cobro</label>
+				<?php echo CHtml::activeDropDownList($modelItem,'id_forma',$modelItem->getFormasPago(),array()); ?>
+			</div>
+			
+	</div>		
+	<div class="contenedor-fila">
+	
+	<div class="contenedor-columna-30">
+		<?php echo $form->labelEx($modelItem,'nro_cheque_certificado'); ?>
+<?php echo $form->textField($modelItem,'nro_cheque_certificado',array('size'=>20,'maxlength'=>110)); ?>
+<?php echo $form->error($modelItem,'nro_cheque_certificado'); ?>
+	</div>
+	<div class="contenedor-columna-30">
+<label for="CuentaBanco">Cuenta Banco</label><?php 
+					$this->widget('application.components.Relation', array(
+							'model' => $modelItem,
+							'relation' => 'cuentaBanco',
+							'fields' => 'descripcion',
+							'allowEmpty' => false,
+							'style' => 'dropdownlist',
+							'showAddButton' => false,
+							)
+						); ?>
+			</div>
+		</div>		
+	</div>
+		
+<div class="contenedor-fila">
+	
+		<div class="contenedor-columna-30">
+			<label>Nro.OP</label>
+<?php echo $form->textField($modelItem,'numero_orden_pago',array('size'=>20,'maxlength'=>90)); ?>
+<?php echo $form->error($modelItem,'numero_orden_pago'); ?>
+	</div>
+	
+	</div>
+	<div class="contenedor-fila">
+		<div class="contenedor-columna-90">
+			<label>Detalles</label>
+			<script type="text/javascript">
+			   
+function copiValue(evt){
+		evt = (evt) ? evt : event;
+    var charCode = (evt.charCode) ? evt.charCode :
+        ((evt.which) ? evt.which : evt.keyCode);
+     if (charCode == 13) {
+    	        $("#CobroItem_Detalles").val($("#CobroItem_Detalles").val()+"\n"+$("#item").val());
+    	        $("#item").val("");
+                return false;
+    } 
+    return true;}
+
+/*$(document).ready(function() {
+	$("#cobro-form").keypress(function(e) {
+		//Para deshabilitar el uso de la tecla "Enter"
+		if (e.which == 13) {
+			return false;
+			}
+		});
+	});*/ 
+</script> 			
+					
+				<?php
+				
+				echo CHtml::textField ( "item", 'Agregar items', array (
+						'size' => 65,
+						'maxlength' => 100,
+						'onkeypress' => 'copiValue(event)' 
+				) );
+				?>
+				<?php
+				
+				$imageUrl = Yii::app ()->theme->baseUrl . "/img/icons/add.png";
+				echo CHtml::link ( '<img src="' . $imageUrl . '" alt="Agregar item de Detalle" />', "#", array (
+						'class' => 'linkClass',
+						'onclick' => '$("#CobroItem_Detalles").val($("#CobroItem_Detalles").val()+"\n"+$("#item").val());' 
+				) );
+				?>
+				<br>
+<?php echo $form->textArea($modelItem, "Detalles", array('style'=>'width: 720px; height: 100px;')); ?>
+<?php echo $form->error($modelItem,'Detalles'); ?>
+	</div>
+	</div>

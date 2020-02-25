@@ -1,0 +1,125 @@
+.clCMAbs {
+	LEFT: 0px;
+	VISIBILITY: hidden;
+	POSITION: absolute;
+	TOP: 0px
+}
+
+.clBar {
+	VISIBILITY: hidden;
+	WIDTH: 10px;
+	POSITION: absolute;
+	HEIGHT: 10px;
+	layer-background-color: #BED0DD
+}
+
+.clLevel0 {
+	PADDING-RIGHT: 2px;
+	PADDING-LEFT: 2px;
+	FONT-WEIGHT: 600;
+	FONT-SIZE: 8px;
+	PADDING-BOTTOM: 2px;
+	COLOR: black;
+	PADDING-TOP: 2px;
+	FONT-FAMILY: tahoma, helvetica, arial;
+	POSITION: absolute;
+	BACKGROUND-COLOR: #cccccc
+}
+
+.clLevel0over {
+	PADDING-RIGHT: 2px;
+	PADDING-LEFT: 2px;
+	FONT-WEIGHT: 600;
+	FONT-SIZE: 12px;
+	PADDING-BOTTOM: 2px;
+	CURSOR: hand;
+	COLOR: #0090ff;
+	PADDING-TOP: 2px;
+	FONT-FAMILY: tahoma, arial, helvetica;
+	POSITION: absolute;
+	BACKGROUND-COLOR: #cccccc
+}
+
+.clLevel1 {
+	PADDING-RIGHT: 2px;
+	PADDING-LEFT: 2px;
+	FONT-SIZE: 11px;
+	PADDING-BOTTOM: 2px;
+	COLOR: #4f4f4f;
+	PADDING-TOP: 2px;
+	FONT-FAMILY: Verdana;
+	POSITION: absolute;
+	BACKGROUND-COLOR: #f6f6f6
+}
+
+.clLevel1over {
+	PADDING-RIGHT: 2px;
+	PADDING-LEFT: 2px;
+	FONT-SIZE: 11px;
+	PADDING-BOTTOM: 2px;
+	CURSOR: hand;
+	PADDING-TOP: 2px;
+	FONT-FAMILY: Verdana;
+	POSITION: absolute;
+	BACKGROUND-COLOR: #e3e3e3
+}
+
+.clLevel1border {
+	VISIBILITY: hidden;
+	POSITION: absolute;
+	BACKGROUND-COLOR: #4e4e4e;
+	layer-background-color: #006699
+}
+
+.clLevel2 {
+	PADDING-RIGHT: 2px;
+	PADDING-LEFT: 2px;
+	FONT-SIZE: 11px;
+	PADDING-BOTTOM: 2px;
+	COLOR: #4f4f4f;
+	PADDING-TOP: 2px;
+	FONT-FAMILY: Verdana;
+	POSITION: absolute;
+	BACKGROUND-COLOR: #e3e3e3
+}
+
+.clLevel2over {
+	PADDING-RIGHT: 2px;
+	PADDING-LEFT: 2px;
+	FONT-SIZE: 11px;
+	PADDING-BOTTOM: 2px;
+	CURSOR: hand;
+	PADDING-TOP: 2px;
+	FONT-FAMILY: Verdana;
+	POSITION: absolute;
+	BACKGROUND-COLOR: #c9c9c9
+}
+
+.clLevel3 {
+	PADDING-RIGHT: 2px;
+	PADDING-LEFT: 2px;
+	FONT-SIZE: 11px;
+	PADDING-BOTTOM: 2px;
+	COLOR: #4f4f4f;
+	PADDING-TOP: 2px;
+	FONT-FAMILY: Verdana;
+	POSITION: absolute;
+	BACKGROUND-COLOR: #c9c9c9
+}
+
+.clLevel3over {
+	PADDING-RIGHT: 2px;
+	PADDING-LEFT: 2px;
+	FONT-SIZE: 11px;
+	PADDING-BOTTOM: 2px;
+	CURSOR: hand;
+	PADDING-TOP: 2px;
+	FONT-FAMILY: Verdana;
+	POSITION: absolute;
+	BACKGROUND-COLOR: #aaa9aa
+}
+
+.clLevel0border {
+	VISIBILITY: hidden;
+	BACKGROUND-COLOR: #ffffff
+}

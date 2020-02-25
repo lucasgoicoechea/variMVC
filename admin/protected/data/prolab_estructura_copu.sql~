@@ -1,0 +1,289 @@
+DROP VIEW vw_postulaciones_usuarios;
+
+CREATE VIEW vw_postulaciones_usuarios AS
+SELECT p.id AS idPostulacion, p.activo, EO.fecha, usuario, id_usuario,nombrecomercial, EO.id AS idOferta, 
+(
+SELECT descripcion
+FROM tipo_oferta
+WHERE id_tipo_oferta = EO.id_tipo_oferta
+LIMIT 1
+) AS tipoOf, area, busqueda, publicar, rotulo, EO.puesto, R.descripcion AS rubro
+FROM postulaciones p
+INNER JOIN empresas_ofertas EO ON p.id_empresas_ofertas = EO.id
+INNER JOIN empresas E ON ( EO.id_empresa = E.id )
+LEFT JOIN rubro_empresa R ON ( E.id_rubro_empresa = R.id )
+ORDER BY EO.fecha DESC;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_menu`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_menu` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL,
+  `url` varchar(100) NOT NULL,
+  `label` varchar(100) NOT NULL,
+  `position` int(11) NOT NULL,
+  `id_acceso` bigint(20) DEFAULT NULL,
+  `publico` int(1) NOT NULL DEFAULT '1',
+  `class` varchar(60) NOT NULL DEFAULT '  ',
+  `img` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
+
+--
+-- Volcado de datos para la tabla `tbl_menu`
+--
+
+INSERT INTO `tbl_menu` (`id`, `parent_id`, `url`, `label`, `position`, `id_acceso`, `publico`, `class`, `img`) VALUES
+(2, 1, 'administradores/admin', 'Mi Perfil', 0, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.png'),
+(4, 3, 'graduados/create', 'Ingresar Graduado', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'add-graduado.jpg'),
+(3, 1, 'graduados/buscar', 'Graduados', 1, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(1, 0, '', '->', 0, NULL, 1, '', NULL),
+(6, 45, 'graduados/buscar', 'de Graduados', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(45, 3, 'graduados/buscar', 'Buscar', 3, 0, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(7, 45, 'graduados/forEmails', 'de E-Mails', 5, NULL, 1, 'documents_slotlet_vidas menu ', 'mail.png'),
+(8, 1, 'usuarios/buscar', 'PROLAB', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(9, 8, 'usuarios/create', 'Ingresar Usuario', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'add-graduado.jpg'),
+(10, 8, 'usuarios/buscar', 'Buscar', 3, 0, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(12, 10, 'usuarios/buscar', 'de Usuarios', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(13, 10, 'usuarios/forEmails', 'de E-Mails', 5, NULL, 1, 'documents_slotlet_vidas menu ', 'mail.png'),
+(14, 1, 'empresas/buscar', 'EMPRESAS', 3, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(15, 14, 'empresas/create', 'Agregar Empresa', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'empresa.gif'),
+(16, 14, 'empresasOfertas/create', 'Agregar Oferta', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(17, 14, 'empresas/buscar', 'Buscar', 3, 0, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(18, 17, 'empresas/buscar', 'de Empresas', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(19, 17, 'empresas/forEmails', 'de E-Mails', 5, NULL, 1, 'documents_slotlet_vidas menu ', 'mail.png'),
+(20, 1, 'profesionales/admin', 'PROFESIONALES', 7, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(21, 20, 'profesionales/create', 'Ingresar Profesional', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'add-graduado.jpg'),
+(22, 20, 'profesionales/admin', 'Buscar', 3, 0, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(23, 1, 'empresasOfertas/admin', 'OFERTAS', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(24, 23, 'empresasOfertas/create', 'Crear Oferta', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'add-graduado.jpg'),
+(25, 23, 'empresasOfertas/admin', 'Ver Ofertas', 3, 0, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(26, 1, '', 'ENCUESTAS', 9, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(27, 26, 'encuestaEstatica/encuestaGeneralView', 'Encuesta General', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(28, 26, 'encuestaEstatica/encuestaViejaView', 'Años Anteriores', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(29, 26, 'encuestaEstatica/encuesta2005View', 'Graduados 2005', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(30, 26, 'encuestaEstatica/encuesta2006View', 'Graduados 2006', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(31, 26, 'encuestaDinamica/listaEncuesta/23', 'Graduados 2007', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(32, 26, 'encuestaDinamica/listaEncuesta/24', 'Graduados 2008', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(33, 26, 'encuestaDinamica/listaEncuesta/27', 'Graduados 2009', 2, NULL, 1, 'documents_slotlet_vidas  menu ', 'oferta-laboral.png'),
+(34, 26, 'encuestaDinamica/listaEncuesta/29', 'Graduados 2010', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(35, 26, 'encuestaDinamica/listaEncuesta/32', 'Graduados 2011', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(36, 26, 'encuestaDinamica/listaEncuesta/34', 'Graduados 2012', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(37, 26, 'encuestaDinamica/listaEncuesta/26', 'ENCUESTA DE GRADO 2010', 2, NULL, 1, 'menu ', 'oferta-laboral.png'),
+(38, 26, 'encuestaDinamica/listaEncuesta/28', 'ENCUESTA DE GRADO 2011', 2, NULL, 1, 'menu ', 'oferta-laboral.png'),
+(39, 26, 'encuestaDinamica/listaEncuesta/30', 'ENCUESTA DE GRADO 2012', 2, NULL, 1, ' menu ', 'oferta-laboral.png'),
+(40, 26, 'encuestaDinamica/listaEncuesta/33', 'ENCUESTA DE GRADO 2013', 2, NULL, 1, 'menu ', 'oferta-laboral.png'),
+(41, 26, 'encuestaDinamica/listaEncuesta/35', 'ENCUESTA DE GRADO 2014', 2, NULL, 1, 'menu ', 'oferta-laboral.png'),
+(42, 26, 'encuestaDinamica/listaEncuesta/31', 'ENCUESTA-TRAYECTORIAS LABORALES', 2, NULL, 1, 'menu ', 'oferta-laboral.png'),
+(43, 26, 'encuestaDinamica/listaEncuesta/25', 'UNLP-UIGLP-FELP', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(5, 3, 'graduados/createAndPoll', 'Nuevo c/Encuesta', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'add-graduado.jpg'),
+(46, 1, '', 'ARTICULOS RELACIONADOS', 11, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(47, 46, 'articulosRelacionados/create', 'Crear Articulo', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(48, 46, 'articulosRelacionados/admin', 'Buscar Articulo', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(49, 1, '', 'NOTICIAS', 10, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(50, 49, 'noticias/create', 'Crear Noticia', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(51, 49, 'noticias/admin', 'Buscar Noticia', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(52, 1, 'empresasOfertas/admin', 'SEGUIMIENTO OFERTAS', 5, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(53, 52, 'empresasOfertas/viewSeguimientos', 'Ver Seguimientos', 3, 0, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(54, 1, 'citas/admin', 'CITAS', 6, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(55, 54, 'citas/index', 'Ver Calendario', 3, 0, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(56, 54, 'citas/admin', 'Ver Citas Grilla', 3, 0, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(57, 54, 'citas/create', 'Crear Cita', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(58, 1, 'cursos/index', 'CURSOS', 7, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(59, 58, 'cursos/create', 'Crear Curso', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(60, 58, 'cursos/index', 'Buscar Curso', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(61, 1, 'convenioMarco/buscar', 'CONVENIOS', 3, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(62, 61, 'convenioMarco/create', 'Crear Convenio Marco', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(63, 61, 'convenioMarco/buscar', 'Buscar Convenio Marco', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(64, 61, 'convenioMarco/listar', 'Buscar Convenio Individual', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(65, 61, 'derivaciones/admin', 'Derivaciones', 5, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(66, 61, 'convenioMarco/actualizarFacultadesMails', 'Mails Facultades', 5, NULL, 1, 'documents_slotlet_vidas menu ', 'mail.png');
+
+
+UPDATE `polls` SET `encuesta_de_grado` = '0' WHERE `id` =32 LIMIT 1;
+update questions q set q.determinado_resp=(select determinado_por from  answers an where  an.id_pregunta=q.id limit 1 ) where q.id in (select an.id_pregunta from  answers an where  an.determinado_por <> '');
+
+update `profesionales` SET dni = REPLACE (dni, '.', '');
+ALTER TABLE `usuarios_entrevistas` ADD `id_modelo` INT NULL;
+
+
+--
+-- Estructura de tabla para la tabla `usuarios_entrevistas_inst_modelos`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_entrevistas_inst_modelos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuarios_entrevistas` int(11) NOT NULL,
+  `id_usuarios_entrevistas_items` int(11) NOT NULL,
+  `puntaje` int(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_entrevistas_items`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_entrevistas_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  `nombre_corto` varchar(50) NOT NULL,
+  `descripcion` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_entrevistas_items`
+--
+
+INSERT INTO `usuarios_entrevistas_items` (`id`, `nombre`, `nombre_corto`, `descripcion`) VALUES
+(1, 'Organizado', 'Organizado', 'Es la capacidad de fijar metas y prioridades a la hora de realizar una tarea, para lo cual se estudian previamente las acciones y objetivos'),
+(2, 'Lógico', 'Lógico', 'Es la capacidad de relacionar y jerarquizar conceptos, y a partir de ellos se construir conclusiones o juicios'),
+(3, 'Estratega', 'Estratega', 'Es la habilidad para comprender rápidamente los cambios de entorno, las oportunidades del mercado, las amenazas competitivas y las fortalezas y debilidades de la propia organización'),
+(4, 'Competitivo', 'Competitivo', 'Es la capacidad de superarse a si mismo'),
+(5, 'Perfeccionista', 'Perfeccionista', 'Es la capacidad de poseer autocontrol frente a sus impulsos, son personas ordenadas y planean cada paso que dan'),
+(6, 'Analista', 'Analista', 'Es la capacidad general que tiene una persona para realizar un análisis lógico. La capacidad de identificar los problemas, reconocer la información significativa buscar y coordinar los datos relevantes'),
+(7, 'Independiente', 'Independiente', 'Supone la capacidad de poder tomar decisiones y realizar tareas de manera autónoma'),
+(8, 'Responsable', 'Responsable', 'Esta competencia está asociada al compromiso con que las personas realizan las tareas encomendadas. Su preocupación por el cumplimiento de lo asignado está por encima de sus propios intereses, la tarea asignada está primero'),
+(9, 'Negociador', 'Negociador', 'Habilidad para crear un ambiente propicio para la colaboración y lograr compromisos duraderos que fortalezcan la relacion'),
+(10, 'Persuasivo', 'Persuasivo', 'Capacidad de producir un impacto o efecto determinado sobre los demás, convencerlos, influir en ellos o impresionarlos con el fin de lograr que ejecuten determinadas acciones'),
+(11, 'Entusiasta', 'Entusiasta', 'Implica la capacidad de motivarse y motivar a sus compañeros o empleados'),
+(12, 'Trabaja en equipo', 'Trabaja en equipo', 'Implica la capacidad de colaborar  y cooperar con los demas, de formar parte de un grupo y trabajar juntos'),
+(13, 'Dinámico', 'Dinámico', 'Se trata de la habilidad para trabajar duro en situaciones cambiantes o alternativas, con interlocutores muy diversos, que cambian en cortos espacios de tiempo, y en jornadas de trabajo prolongadas, sin que por esto se vea afectado su nivel de actividad'),
+(14, 'Orientación al Cliente', 'Orientación al Cliente', 'Implica un deseo de ayudar o servir al cliente, de comprender y satisfacer sus necesidades, aun aquellas no expresadas'),
+(15, 'Orientación a los Resultados', 'Orientación al Resultado', 'Es la capacidad de encaminar todos los actos al logro de lo esperado, actuando con velocidad y sentido de urgencia ante decisiones importantes, necesarias para satisfacer las necesidades del cliente, superar a los competidores o mejorar la organización'),
+(16, 'Planificador', 'Planificador', 'Es la capacidad de fijar metas y prioridades a la hora de realizar una tarea, para lo cual se estudian previamente las acciones y objetivos'),
+(17, 'Autosuficiente', 'Autosuficiente', 'Es la capacidad de realizar las tareas de manera autónoma, lo cual no significa estar aislado del entorno laboral'),
+(18, 'Flexible', 'Flexible', 'Disposición para adaptarse fácilmente y trabajar en distintas y variadas situaciones y con personas y grupos diversos'),
+(19, 'Impulsor', 'Impulsor', 'Es la predisposición de actuar proactivamente y a pensar no sólo lo que hay que hacer en el futuro'),
+(20, 'Observador', 'Observador', 'Es la capacidad de prestar mucha atención a una cosa/persona con detenimiento para adquirir algún conocimiento'),
+(21, 'Metódico', 'Metódico', 'Implica la capacidad de seguir procedimientos en su tarea diaria'),
+(22, 'Proactivo', 'Proactivo', 'Supone la iniciativa y capacidad para anticiparse a problemas o necesidades futuras'),
+(23, 'Preciso', 'Preciso', 'Implica la capacidad de ser exacto, riguroso y determinante en la tarea'),
+(24, 'Perseverante', 'Perseverante', 'Firmeza y constancia en la ejecución de los negocios. Es la predisposición a mantenerse firme y constante en la prosecución de acciones y emprendimientos de manera estable o continua hasta lograr el objetivo'),
+(25, 'Cooperativo', 'Cooperativo', 'Es la capacidad de cooperar de manera espontánea con su grupo de trabajo para el logro de un bien común'),
+(26, 'Atento', 'Atento', 'Esta competencia implica un alerta constante por parte del empleado en sus tareas cotidianas');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_entrevistas_modelos`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_entrevistas_modelos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `modelo` varchar(60) NOT NULL,
+  `nombre_corto` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_entrevistas_modelos`
+--
+
+INSERT INTO `usuarios_entrevistas_modelos` (`id`, `modelo`, `nombre_corto`) VALUES
+(1, 'ADMINISTRATIVO', 'ADMINISTRATIVO'),
+(2, 'COMERCIALIZACION', 'COMERCIALIZACION'),
+(3, 'INVESTIGACION', 'INVESTIGACION'),
+(4, 'OPERACIÓN', 'OPERACIÓN'),
+(5, 'PRODUCCION', 'PRODUCCION');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_entrevistas_modelo_item`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_entrevistas_modelo_item` (
+  `id_usuarios_entrevistas_modelos` int(11) NOT NULL,
+  `id_usuarios_entrevistas_item` int(11) NOT NULL,
+  `orden` int(11) NOT NULL DEFAULT '0',
+  `visible` int(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_usuarios_entrevistas_modelos`,`id_usuarios_entrevistas_item`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuarios_entrevistas_modelo_item`
+--
+
+INSERT INTO `usuarios_entrevistas_modelo_item` (`id_usuarios_entrevistas_modelos`, `id_usuarios_entrevistas_item`, `orden`, `visible`) VALUES
+(1, 1, 1, 1),
+(1, 2, 2, 1),
+(1, 3, 3, 1),
+(1, 4, 4, 1),
+(1, 5, 5, 1),
+(1, 6, 6, 1),
+(1, 7, 7, 1),
+(1, 8, 8, 1),
+(2, 8, 2, 1),
+(2, 9, 1, 1),
+(2, 10, 3, 1),
+(2, 11, 4, 1),
+(2, 12, 5, 1),
+(2, 13, 6, 1),
+(2, 14, 7, 1),
+(2, 15, 8, 1),
+(3, 8, 5, 1),
+(3, 16, 1, 1),
+(3, 17, 2, 1),
+(3, 18, 3, 1),
+(3, 19, 4, 1),
+(3, 20, 6, 1),
+(3, 21, 7, 1),
+(4, 7, 6, 1),
+(4, 8, 1, 1),
+(4, 20, 4, 1),
+(4, 22, 2, 1),
+(4, 23, 3, 1),
+(4, 24, 5, 1),
+(4, 26, 7, 1),
+(5, 1, 6, 1),
+(5, 5, 5, 1),
+(5, 8, 4, 1),
+(5, 17, 3, 1),
+(5, 21, 8, 1),
+(5, 24, 2, 1),
+(5, 25, 1, 1),
+(5, 26, 7, 1);
+
+ALTER TABLE `usuarios_entrevistas` ADD `puntual` INT( 1 ) NOT NULL DEFAULT '1',
+ADD `buena_presencia` INT( 1 ) NOT NULL DEFAULT '1';
+
+ALTER TABLE `usuarios_entrevistas` ADD `id_remuneracion` INT NULL;
+
+--
+-- Estructura de tabla para la tabla `usuarios_escalas_remuneracion`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_escalas_remuneracion` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `monto` int(10) DEFAULT NULL,
+  `descripcion` varchar(250) NOT NULL,
+  `orden` int(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_escalas_remuneracion`
+--
+
+INSERT INTO `usuarios_escalas_remuneracion` (`id`, `monto`, `descripcion`, `orden`) VALUES
+(1, 2000, 'Menos de $2000', 1),
+(2, 2500, 'Entre $2000 y $2500', 2),
+(3, 3000, 'Entre $2500 y $3000', 3),
+(4, 4000, 'Entre $3000 y $4000', 4),
+(5, 5000, 'Entre $4000 y $5000', 5),
+(6, 6000, 'Entre $5000 y $6000', 6),
+(7, 8000, 'Entre $6000 y $8000', 7),
+(8, 10000, 'Entre $8000 y $10000', 8),
+(9, 12000, 'Entre $10000 y $12000', 9),
+(10, 15000, 'Más de $12000', 10);
+
+ALTER TABLE `usuarios_disponibilidad` ADD COLUMN `turno_rotativo` TINYINT(1)  NOT NULL AFTER `id_registro`;
+ALTER TABLE `usuarios_entrevistas` ADD COLUMN `lenguaje_formal` INT(1)  NOT NULL DEFAULT 1 AFTER `id_modelo`;
+ALTER TABLE `graduados` ADD COLUMN `edad` MEDIUMINT(2)  AFTER `fecha_ingreso`;

@@ -1,0 +1,48 @@
+
+<p class="error">
+	Campos con <span class="required">*</span> son obligatorios.
+</p>
+
+<?php echo "<?php echo \$form->errorSummary(\$model); ?>\n"; ?>
+
+<div class="contenedor-tabla">
+		
+<?php
+foreach ( $this->tableSchema->columns as $column ) {
+	if ($column->isPrimaryKey)
+		continue;
+	?>
+	<div class="contenedor-fila">
+		<div class="contenedor-columna">
+		<?php
+	if (! $column->isForeignKey) {
+		echo "<?php echo " . $this->generateActiveLabel ( $this->modelClass, $column ) . "; ?>\n";
+		echo "<?php " . $this->generateActiveField ( $this->modelClass, $column ) . "; ?>\n";
+		echo "<?php echo \$form->error(\$model,'{$column->name}'); ?>\n";
+	}
+	?>
+	</div>
+	</div>
+
+
+<?php
+}
+?>
+
+	<div class="contenedor-fila">
+		
+<?php
+foreach ( $this->getRelations () as $key => $relation ) { ?>
+<div class="contenedor-columna">
+<?php	if ($relation [0] == 'CBelongsToRelation' or $relation [0] == 'CHasOneRelation' or $relation [0] == 'CManyManyRelation') {
+		printf ( '<label for="%s">Belonging %s</label>', $relation [1], $relation [1] );
+		echo "<?php " . $this->generateRelation ( $this->modelClass, $key, $relation ) . "; ?>\n";
+		?>
+			<?php
+	}?>
+</div>
+<?php
+}
+?>
+</div>
+</div>

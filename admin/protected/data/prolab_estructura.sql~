@@ -1,0 +1,877 @@
+--
+-- Estructura de tabla para la tabla `authassignment`
+--
+
+CREATE TABLE IF NOT EXISTS `AuthAssignment` (
+  `itemname` varchar(64) NOT NULL,
+  `userid` varchar(64) NOT NULL,
+  `bizrule` text,
+  `data` text,
+  PRIMARY KEY (`itemname`,`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+
+--
+-- Estructura tabla `authitem` -- SON LOS ROLES
+--
+
+CREATE TABLE IF NOT EXISTS `AuthItem` (
+  `name` varchar(64) NOT NULL,
+  `type` int(11) NOT NULL COMMENT '1-Portal Web 2-Intranet',
+  `description` text,
+  `bizrule` text,
+  `data` text,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `authitem`
+--
+
+INSERT INTO `AuthItem` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
+('admin', 1, 'admin', NULL, 'N;'),
+('empresa', 1, 'empresa', NULL, 'N;'),
+('super', 1, 'acceso a todo', NULL, 'N;'),
+('usuario', 1, 'usuario', NULL, 'N;');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `authitemchild`
+--
+
+CREATE TABLE IF NOT EXISTS `AuthItemChild` (
+  `parent` varchar(64) NOT NULL,
+  `child` varchar(64) NOT NULL,
+  PRIMARY KEY (`parent`,`child`),
+  KEY `child` (`child`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `userslogin`
+--
+
+CREATE TABLE IF NOT EXISTS `userslogin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(128) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(128) CHARACTER SET latin1 NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `authassignment`
+--
+ALTER TABLE `AuthAssignment`
+  ADD CONSTRAINT `authassignment_ibfk_1` FOREIGN KEY (`itemname`) REFERENCES `AuthItem` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `authitemchild`
+--
+ALTER TABLE `AuthItemChild`
+  ADD CONSTRAINT `authitemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `authitem` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `authitemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `authitem` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE  `usuarios` CHANGE  `sexo`  `genero` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT  '';
+ALTER TABLE  `usuarios` DROP  `dia` ,
+DROP  `mes` ,
+DROP  `ano` ;
+ALTER TABLE  `usuarios` CHANGE  `cp`  `codigo_postal` VARCHAR( 20 ) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL DEFAULT  '';
+
+
+update `usuarios` uss set uss.id_ciudad = (select c_id from com_localidad cl where cl.d_descripcion LIKE uss.localidad LIMIT 1 ) 
+WHERE `id_ciudad`<1;
+update `usuarios` set `id_ciudad`=21442 WHERE `localidad` like '%gonnet%';
+update `usuarios` set `id_ciudad`=46 WHERE `otrosCiudad` like '%La Plata%';
+update `usuarios` set `id_ciudad`=160 WHERE `otrosCiudad` like '%federal%' or localidad like '%federal%';
+update `usuarios` set `id_ciudad`=46 WHERE `otrosCiudad` like '%La%Plata%';
+update  `usuarios` set id_ciudad=46 WHERE localidad = '' AND id_ciudad <2;
+ALTER TABLE `usuarios` ADD `id_nivel_estudio` BIGINT( 10 ) NOT NULL AFTER `email` ,
+ADD `id_avance_estudio` BIGINT( 10 ) NOT NULL AFTER `id_nivel_estudio` ;
+ ALTER TABLE `usuarios` DROP `localidad`;
+
+-- nivel de usuario
+
+CREATE TABLE IF NOT EXISTS `usuarios_nivel_estudio` (
+  `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(150) COLLATE utf8_spanish2_ci NOT NULL,
+  `descripcion_abreviada` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_nivel_estudio`
+--
+
+INSERT INTO `usuarios_nivel_estudio` (`id`, `descripcion`, `descripcion_abreviada`) VALUES
+(1, 'Primario', 'Prim.'),
+(2, 'Secundario', 'Secund.'),
+(3, 'Terciario', 'Terc.'),
+(4, 'Universitario', 'Univ.');
+
+
+--
+-- Estructura de tabla para la tabla `usuarios_avance_estudio`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_avance_estudio` (
+  `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(150) COLLATE utf8_spanish2_ci NOT NULL,
+  `descripcion_abreviada` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_avance_estudio`
+--
+
+INSERT INTO `usuarios_avance_estudio` (`id`, `descripcion`, `descripcion_abreviada`) VALUES
+(1, 'Completo', 'Comp.'),
+(2, 'Incompleto', 'Incom.');
+
+
+ ALTER TABLE `usuarios` DROP `fecha`;
+ ALTER TABLE `usuarios` DROP `provincia`;
+ ALTER TABLE `usuarios` CHANGE `clave` `password` VARCHAR( 250 ) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL ;
+
+update `usuarios` set `id_nivel_estudio`= 4 where `condicion`='graduado' or `condicion`='estudiante' ;
+update `usuarios` set `id_avance_estudio`=2 where `condicion`='estudiante' ;
+update `usuarios` set `id_avance_estudio`=1 where `condicion`='graduado' ;
+update `usuarios` set `id_avance_estudio`=2,`id_nivel_estudio`=2 where `condicion`='' ;
+update `usuarios` set id_estado_civil = (select eci.id from estadocivil eci where eci.descripcion LIKE `estadocivil` LIMIT 1 ) WHERE id_estado_civil=0;
+
+ ALTER TABLE `usuarios` DROP `estadocivil`;
+
+ ALTER TABLE `usuarios` DROP `condicion`;
+
+
+CREATE TABLE IF NOT EXISTS `usuarios_rubro_laboral` (
+  `id` bigint(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descripcion` varchar(150) COLLATE utf8_spanish2_ci NOT NULL,
+  `descripcion_abreviada` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=21 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_rubro_laboral`
+--
+
+INSERT INTO `usuarios_rubro_laboral` (`id`, `descripcion`, `descripcion_abreviada`) VALUES
+(1, 'Administración/Oficina', 'Administración/OficinaPrim.'),
+(2, 'Arte/Diseño/Comunic', 'Arte/Diseño/Comunic'),
+(3, 'Científico/Investigación', 'Científico/Investigación'),
+(4, 'Informática', 'Informática'),
+(5, 'Dirección/Gerencia', 'Dirección/Gerencia'),
+(6, 'Economía/Contabilidad', 'Economía/Contabilidad'),
+(7, 'Educación', 'Educación'),
+(8, 'Limpieza/Mantenimiento', 'Limpieza/Mantenimiento'),
+(9, 'Seguridad', 'Seguridad'),
+(10, 'Logística/Transporte', 'Logística/Transporte'),
+(11, 'Hostelería/Turismo', 'Hostelería/Turismo'),
+(12, 'Ingeniería', 'Ingeniería'),
+(13, 'Legal', 'Legal'),
+(14, 'Márketing/Ventas', 'Márketing/Ventas'),
+(15, 'Salud', 'Salud'),
+(16, 'Asesoría', 'Asesoría'),
+(17, 'Operario de Fábrica', 'Operario de Fábric'),
+(18, 'Oficios', 'Oficios'),
+(19, 'Gastronomia', 'Gastronomia'),
+(20, 'Técnico', 'Técnico');
+
+
+CREATE TABLE IF NOT EXISTS `usuarios_rubro_laboral_experiencia` (
+  `id_usuarios_rubro_laboral` bigint(10) NOT NULL,
+  `id_usuarios` bigint(10) NOT NULL,
+  PRIMARY KEY (`id_usuarios_rubro_laboral`,`id_usuarios`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+CREATE TABLE IF NOT EXISTS `usuarios_rubro_laboral_busca` (
+  `id_usuarios_rubro_laboral` bigint(10) NOT NULL,
+  `id_usuarios` bigint(10) NOT NULL,
+  PRIMARY KEY (`id_usuarios_rubro_laboral`,`id_usuarios`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+ALTER TABLE `usuarios` ADD `id_userslogin` INT( 11 ) NOT NULL AFTER `id_estado_usuario`;
+ALTER TABLE `usuarios` CHANGE `recibir_oferta` `recibir_oferta` TINYINT( 1 ) NOT NULL DEFAULT '1';
+ALTER TABLE `userslogin` DROP `email` ,
+DROP `birthday` ,
+DROP `countries_id` ,
+DROP `cities_id` ;
+
+
+ALTER TABLE `usuarios_estudios` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+ALTER TABLE `usuarios_estudios` ADD INDEX ( `id_carrera` );
+ALTER TABLE `usuarios_estudios` ADD INDEX ( `id_usuario` );
+ALTER TABLE `usuarios_estudios` ADD INDEX ( `id_nivel` );
+ALTER TABLE `usuarios_estudios` ADD INDEX ( `id_institucion` ) ;
+ALTER TABLE `usuarios_estudios` ADD INDEX ( `id_titulo` , `id_estado_carrera` , `id_grado_avance` ) ;
+
+ALTER TABLE `carreras` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+ALTER TABLE `carreras` CHANGE `id` `id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `idFacultad` `id_facultad` BIGINT( 20 ) UNSIGNED NOT NULL DEFAULT '0',
+CHANGE `idTitulo` `id_titulo` BIGINT( 20 ) NULL DEFAULT NULL ;
+ALTER TABLE `carreras` ADD INDEX ( `id_facultad` );
+ALTER TABLE `carreras` ADD INDEX ( `id_titulo` ) ;
+
+ALTER TABLE `facultades` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+ALTER TABLE `facultades` CHANGE `id` `id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `titulos` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+ALTER TABLE `titulos` ADD INDEX ( `id_nivel` ) ;
+
+ALTER TABLE `estudios_nivel` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+UPDATE `estudios_nivel` SET `descripcion` = 'Estudios de Posgrado (mas de un Año)' WHERE `estudios_nivel`.`id` =5;
+
+ALTER TABLE `titulos` ADD FOREIGN KEY ( `id_nivel` ) REFERENCES `estudios_nivel` (
+`id` ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+ALTER TABLE `titulos` CHANGE `descripcion` `descripcion` VARCHAR( 150 ) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NULL DEFAULT NULL ;
+UPDATE `carreras` SET `id_titulo` = '22' WHERE `carreras`.`id` =23;
+
+ALTER TABLE `carreras` DROP FOREIGN KEY `carreras_ibfk_1` ;
+ALTER TABLE `carreras` ADD FOREIGN KEY ( `id_facultad` ) REFERENCES `facultades` (
+`id` ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+ALTER TABLE `carreras` ADD FOREIGN KEY ( `id_titulo` ) REFERENCES `titulos` (
+`id` ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE `instituciones` ENGINE = InnoDB;
+
+ALTER TABLE `usuarios` CHANGE `id` `id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `estado_carrera` ENGINE = InnoDB DEFAULT CHARACTER SET ucs2 COLLATE ucs2_spanish2_ci;
+
+ALTER TABLE `grado_avance_carrera` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+
+ALTER TABLE `usuarios_estudios` CHANGE `id_carrera` `id_carrera` BIGINT( 20 ) NOT NULL DEFAULT '1';
+
+ALTER TABLE `usuarios_estudios` 
+CHANGE `id_estado_carrera` `id_estado_carrera` BIGINT( 20 ) NOT NULL DEFAULT '1',
+CHANGE `id_grado_avance` `id_grado_avance` BIGINT( 20 ) NOT NULL DEFAULT '1';
+
+INSERT INTO `titulos` ( `id` , `descripcion` , `id_nivel`)
+VALUES (NULL , 'SIN TITULO', '4');
+UPDATE `titulos` SET `id`=0 WHERE `descripcion`='SIN TITULO';
+
+ALTER TABLE `usuarios_estudios` ADD FOREIGN KEY ( `id_nivel` ) REFERENCES `estudios_nivel` (
+`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE `usuarios_estudios` ADD FOREIGN KEY ( `id_institucion` ) REFERENCES `instituciones` (
+`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE `usuarios_estudios` ADD FOREIGN KEY ( `id_titulo` ) REFERENCES `titulos` (
+`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+
+
+ALTER TABLE `usuarios_estudios` CHANGE `id` `id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT ;
+
+
+ALTER TABLE `usuarios_idiomas` ENGINE= InnoDB;
+ 
+ALTER TABLE `usuarios_idiomas`  DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+ALTER TABLE `usuarios_idiomas`ADD INDEX (`id_nivel`) ;
+ALTER TABLE `usuarios_idiomas`ADD INDEX (`id_usuario`) ;
+ALTER TABLE `usuarios_idiomas`ADD INDEX (`id_item`) ;
+ALTER TABLE`cursos_niveles` ENGINE= InnoDB;
+ ALTER TABLE `usuarios_idiomas` ADD FOREIGN KEY (`id_nivel`)REFERENCES`cursos_niveles` (
+`id` ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+ ALTER TABLE `usuarios_idiomas` ADD FOREIGN KEY (`id_item`)REFERENCES `item_idioma` (
+`id` ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+ALTER TABLE `cursos_rubros` ENGINE= InnoDB;
+ALTER TABLE `usuarios_cursos` CHANGE `certificado` `certificado` TINYINT(1) NULL DEFAULT'0';
+ALTER TABLE `usuarios_cursos` ENGINE= InnoDB;
+ALTER TABLE `usuarios_cursos` ADD INDEX (`id_rubro`) ;
+ALTER TABLE `usuarios_cursos` ADD INDEX (`id_usuario`) ;
+ALTER TABLE `usuarios_cursos` ADD INDEX (`id_unidad_duracion`) ;
+ 
+ALTER TABLE `usuarios_cursos` ADD FOREIGN KEY (`id_rubro`)REFERENCES `cursos_rubros` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+  ALTER TABLE `usuarios_cursos` ADD FOREIGN KEY (`id_unidad_duracion`) REFERENCES `cursos_duracion` (
+`id`) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+ 
+ALTER TABLE `usuarios_informatica` CHANGE `certificado` `certificado` TINYINT(1) NULL DEFAULT '0';
+ 
+ALTER TABLE `usuarios_informatica` CHANGE `id` `id` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `usuarios_informatica` ENGINE= InnoDB;
+ 
+ALTER TABLE `usuarios_informatica` ADD INDEX (`id_nivel`) ;
+ALTER TABLE `usuarios_informatica` ADD INDEX (`id_usuario`) ;
+ALTER TABLE `usuarios_informatica` ADD INDEX (`id_item`) ;
+ALTER TABLE `usuarios_informatica` ADD FOREIGN KEY (`id_nivel`) REFERENCES `cursos_niveles` (
+`id` ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+ALTER TABLE `usuarios_informatica` ADD FOREIGN KEY (`id_item`) REFERENCES `item_informatica` (
+`id` ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+ALTER TABLE `usuarios_contabilidad` ADD INDEX (`id_nivel`) ;
+ALTER TABLE `usuarios_contabilidad` ADD INDEX (`id_usuario`) ;
+ALTER TABLE `usuarios_contabilidad` ADD INDEX (`id_item`) ;
+ALTER TABLE `usuarios_contabilidad` ADD FOREIGN KEY (`id_nivel`) REFERENCES `cursos_niveles` (
+`id` ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+ALTER TABLE `usuarios_contabilidad` ADD FOREIGN KEY (`id_item`) REFERENCES `item_contables` (
+`id` ) ON DELETE RESTRICT ON UPDATE RESTRICT ;
+
+ALTER TABLE `usuarios_contabilidad` CHANGE `certificado` `certificado` TINYINT( 1 ) NULL DEFAULT '0';
+UPDATE `usuarios_contabilidad` SET certificado =0 WHERE certificado IS NULL ;
+
+ALTER TABLE `discapacidades`
+  DROP `codigo_discapacidad`;
+
+ALTER TABLE `usuarios_discapacidades` CHANGE `codigo_discapacidad` `id_discapacidad` BIGINT( 20 ) NOT NULL ;
+
+ALTER TABLE `discapacidades` CHANGE `id` `id` BIGINT( 20 ) NOT NULL AUTO_INCREMENT ;
+ALTER TABLE `discapacidades` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+ALTER TABLE `discapacidades` ADD PRIMARY KEY ( `id` ) ;
+
+ALTER TABLE `rubro_empresa` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+ALTER TABLE `usuarios_experiencia` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+ALTER TABLE `usuarios_experiencia` CHANGE `id` `id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT ;
+ALTER TABLE `usuarios_experiencia` ADD PRIMARY KEY ( `id` ) ;
+ALTER TABLE `usuarios_experiencia` ADD INDEX ( `id_usuario`  ) ;
+ALTER TABLE `usuarios_experiencia` ADD INDEX (  `id_rubro` ) ;
+
+ALTER TABLE `usuarios_objetivos` CHANGE `id` `id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `usuarios_objetivos` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+ALTER TABLE `usuarios_objetivos` CHANGE `idUsuario` `id_usuario` BIGINT( 20 ) NULL DEFAULT NULL ;
+
+ALTER TABLE `usuarios_disponibilidad` CHANGE `id` `id` BIGINT( 20 ) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `usuarios_disponibilidad` ENGINE = InnoDB DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+
+
+--
+-- Table structure for table `sys_pages`
+--
+
+CREATE TABLE IF NOT EXISTS `articulos_informativos` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `codigo` int(10) NOT NULL DEFAULT '0',
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `subtitle` varchar(255) NOT NULL DEFAULT '',
+  `active` int(1) NOT NULL DEFAULT '0',
+  `page_header` text NOT NULL,
+  `text` text NOT NULL,
+  `page_footer` text NOT NULL,
+  `signature` text NOT NULL,
+  `date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `counter` int(10) NOT NULL DEFAULT '0',
+  `clanguage` varchar(30) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`),
+  KEY `pid` (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
+
+ALTER TABLE `usuarios` ADD `cv_file_name` VARCHAR( 250 ) NULL DEFAULT NULL ;
+
+ALTER TABLE `articulos_relacionados` CHANGE `id` `id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `idUsuario` `id_usuario` BIGINT( 20 ) NULL DEFAULT NULL;
+
+ALTER TABLE `tipo_oferta` CHANGE `id_tipo_oferta` `id` INT( 11 ) NOT NULL AUTO_INCREMENT ,
+CHANGE `desc_tipo_oferta` `descripcion` VARCHAR( 100 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '';
+
+ALTER TABLE `empresas_ofertas` CHANGE `tipoOf` `id_tipo_oferta` INT( 11 ) NOT NULL;
+
+ALTER TABLE `postulaciones` ENGINE = InnoDB;
+
+ALTER TABLE `postulaciones` CHANGE `id` `id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `idU` `id_usuario` BIGINT( 20 ) NOT NULL DEFAULT '0',
+CHANGE `idO` `id_empresas_ofertas` BIGINT( 20 ) NOT NULL DEFAULT '0',
+CHANGE `ultimoVisto` `ultimoVisto` CHAR( 1 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT '';
+
+ALTER TABLE `postulaciones` ADD `activa` TINYINT( 1 ) NOT NULL DEFAULT '1',
+ADD `ultimo_visitado` TINYINT( 1 ) NOT NULL DEFAULT '0';
+
+UPDATE `postulaciones` SET activa =1 WHERE activo = 'y';
+UPDATE `postulaciones` SET activa =0 WHERE activo <> 'y';
+
+UPDATE `postulaciones` SET ultimo_visitado =1 WHERE ultimoVisto = 'y';
+
+ALTER TABLE `profesionales` ADD `id_userslogin` INT( 11 ) NOT NULL;
+ALTER TABLE `profesionales` CHANGE `matricula` `matricula` VARCHAR( 100 ) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT ' ';
+
+--
+-- Table structure for table `tipo_userslogin`
+--
+
+CREATE TABLE IF NOT EXISTS `tipo_userslogin` (
+  `id` int(4) NOT NULL,
+  `descripcion` varchar(50) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Dumping data for table `tipo_userslogin`
+--
+
+INSERT INTO `tipo_userslogin` (`id`, `descripcion`) VALUES
+(1, 'usuarios'),
+(2, 'profesionales'),
+(3, 'empresas'),
+(4, 'operadores');
+
+ALTER TABLE `userslogin` ADD `id_tipo_userslogin` INT( 4 ) NOT NULL DEFAULT '1';
+
+UPDATE `tipo_userslogin` SET `descripcion` = 'USUARIO' WHERE `tipo_userslogin`.`id` =1 AND `tipo_userslogin`.`descripcion` = 'usuarios' LIMIT 1 ;
+UPDATE `tipo_userslogin` SET `descripcion` = 'PROFESIONAL' WHERE `tipo_userslogin`.`id` =2 AND `tipo_userslogin`.`descripcion` = 'profesionales' LIMIT 1 ;
+UPDATE `tipo_userslogin` SET `descripcion` = 'EMPRESA' WHERE `tipo_userslogin`.`id` =3 AND `tipo_userslogin`.`descripcion` = 'empresas' LIMIT 1 ;
+UPDATE `tipo_userslogin` SET `descripcion` = 'OPERADOR' WHERE `tipo_userslogin`.`id` =4 AND `tipo_userslogin`.`descripcion` = 'operadores' LIMIT 1 ;
+
+ALTER TABLE `usuarios` ADD `id_titulo` BIGINT( 20 ) NULL DEFAULT NULL;
+ALTER TABLE `empresas` CHANGE `id` `id` BIGINT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `empresas` ADD `id_userslogin` INT( 11 ) NOT NULL;
+RENAME TABLE `authassignment` TO `AuthAssignment` ;
+RENAME TABLE `authitem` TO `AuthItem` ;
+RENAME TABLE `authitemchild` TO `AuthItemChild` ;
+
+ALTER TABLE `preseleccionados` CHANGE `idOferta` `id_empresas_ofertas` BIGINT( 20 ) NOT NULL DEFAULT '0',
+ALTER TABLE `preseleccionados` CHANGE `idUsuario` `id_usuario` BIGINT( 20 ) NOT NULL DEFAULT '0';
+
+CREATE TABLE IF NOT EXISTS `userslogin_activacion_pass` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id_userslogin` bigint(20) NOT NULL,
+  `tipo_userslogin` bigint(4) NOT NULL,
+  `codigo_activacion` varchar(200) COLLATE utf8_spanish2_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=1 ;
+
+ALTER TABLE `profesionales` ADD `latitud` VARCHAR( 50 ) NULL DEFAULT '-34.920075552814914',
+ADD `longitud` VARCHAR( 50 ) NULL DEFAULT '-57.95639991760254';
+
+ALTER TABLE `admin` ADD `id_userslogin` INT( 11 ) NOT NULL AFTER `verEntrevista`;
+
+--
+-- Estructura de tabla para la tabla `permisos_operadores`
+--
+
+CREATE TABLE IF NOT EXISTS `admin_acceso` (
+  `id_admin` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `id_acceso` bigint(20) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id_admin`,`id_acceso`),
+  KEY `FK_permisos_operadores_1` (`id_acceso`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `admin_acceso`
+--
+
+INSERT INTO `admin_acceso` (`id_admin`, `id_acceso`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 10),
+(1, 11),
+(10, 1),
+(10, 2),
+(10, 3),
+(10, 4),
+(10, 5),
+(10, 6),
+(10, 7),
+(10, 8),
+(10, 9),
+(10, 10),
+(10, 11),
+(11, 1),
+(11, 2),
+(11, 3),
+(11, 4),
+(11, 5),
+(11, 6),
+(11, 7),
+(11, 8),
+(11, 9),
+(11, 10),
+(11, 11),
+(12, 2),
+(12, 3),
+(12, 6),
+(12, 8),
+(13, 1),
+(13, 2),
+(13, 3),
+(13, 4),
+(13, 6),
+(13, 7),
+(13, 8),
+(13, 9),
+(14, 1),
+(14, 2),
+(14, 3),
+(14, 4),
+(14, 5),
+(14, 7),
+(14, 8),
+(15, 1),
+(15, 2),
+(15, 6),
+(16, 1),
+(16, 2),
+(16, 8),
+(17, 1),
+(17, 2),
+(17, 3),
+(17, 4),
+(17, 5),
+(17, 6),
+(17, 7),
+(17, 8),
+(17, 9),
+(17, 10),
+(19, 1),
+(19, 2),
+(19, 3),
+(19, 7),
+(19, 8),
+(19, 11),
+(20, 1),
+(20, 2),
+(20, 3),
+(21, 1),
+(21, 2),
+(21, 3),
+(21, 11),
+(22, 10),
+(23, 10),
+(24, 10),
+(25, 10),
+(26, 10),
+(27, 10),
+(28, 10),
+(29, 9),
+(30, 10),
+(31, 1),
+(32, 1),
+(32, 2),
+(33, 1),
+(33, 9),
+(34, 1),
+(34, 2),
+(34, 3),
+(34, 9),
+(36, 1),
+(36, 2),
+(36, 3),
+(36, 4),
+(36, 5),
+(36, 6),
+(36, 7),
+(36, 8),
+(36, 9),
+(36, 10),
+(36, 11),
+(38, 1),
+(38, 3);
+
+CREATE TABLE IF NOT EXISTS `tipo_admin` (
+  `id` bigint(20) NOT NULL DEFAULT '0',
+  `descripcion` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipo_usuario_sistema`
+--
+
+INSERT INTO `tipo_admin` (`id`, `descripcion`) VALUES
+(1, 'Administrador'),
+(2, 'Operador');
+
+DROP VIEW vw_postulaciones_usuarios;
+
+CREATE VIEW vw_postulaciones_usuarios AS
+SELECT p.id AS idPostulacion, p.activo, EO.fecha, usuario, id_usuario,nombrecomercial, EO.id AS idOferta, 
+(
+SELECT descripcion
+FROM tipo_oferta
+WHERE id_tipo_oferta = EO.id_tipo_oferta
+LIMIT 1
+) AS tipoOf, area, busqueda, publicar, rotulo, EO.puesto, R.descripcion AS rubro
+FROM postulaciones p
+INNER JOIN empresas_ofertas EO ON p.id_empresas_ofertas = EO.id
+INNER JOIN empresas E ON ( EO.id_empresa = E.id )
+LEFT JOIN rubro_empresa R ON ( E.id_rubro_empresa = R.id )
+ORDER BY EO.fecha DESC;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_menu`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_menu` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(11) NOT NULL,
+  `url` varchar(100) NOT NULL,
+  `label` varchar(100) NOT NULL,
+  `position` int(11) NOT NULL,
+  `id_acceso` bigint(20) DEFAULT NULL,
+  `publico` int(1) NOT NULL DEFAULT '1',
+  `class` varchar(60) NOT NULL DEFAULT '  ',
+  `img` varchar(60) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=58 ;
+
+--
+-- Volcado de datos para la tabla `tbl_menu`
+--
+
+INSERT INTO `tbl_menu` (`id`, `parent_id`, `url`, `label`, `position`, `id_acceso`, `publico`, `class`, `img`) VALUES
+(2, 1, 'administradores/admin', 'Mi Perfil', 0, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.png'),
+(4, 3, 'graduados/create', 'Ingresar Graduado', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'add-graduado.jpg'),
+(3, 1, 'graduados/buscar', 'Graduados', 1, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(1, 0, '', '->', 0, NULL, 1, '', NULL),
+(6, 45, 'graduados/buscar', 'de Graduados', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(45, 3, 'graduados/buscar', 'Buscar', 3, 0, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(7, 45, 'graduados/forEmails', 'de E-Mails', 5, NULL, 1, 'documents_slotlet_vidas menu ', 'mail.png'),
+(8, 1, 'usuarios/buscar', 'PROLAB', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(9, 8, 'usuarios/create', 'Ingresar Usuario', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'add-graduado.jpg'),
+(10, 8, 'usuarios/buscar', 'Buscar', 3, 0, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(12, 10, 'usuarios/buscar', 'de Usuarios', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(13, 10, 'usuarios/forEmails', 'de E-Mails', 5, NULL, 1, 'documents_slotlet_vidas menu ', 'mail.png'),
+(14, 1, 'empresas/buscar', 'EMPRESAS', 3, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(15, 14, 'empresas/create', 'Agregar Empresa', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'empresa.gif'),
+(16, 14, 'empresasOfertas/create', 'Agregar Oferta', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(17, 14, 'empresas/buscar', 'Buscar', 3, 0, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(18, 17, 'empresas/buscar', 'de Empresas', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(19, 17, 'empresas/forEmails', 'de E-Mails', 5, NULL, 1, 'documents_slotlet_vidas menu ', 'mail.png'),
+(20, 1, 'profesionales/admin', 'PROFESIONALES', 7, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(21, 20, 'profesionales/create', 'Ingresar Profesional', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'add-graduado.jpg'),
+(22, 20, 'profesionales/admin', 'Buscar', 3, 0, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(23, 1, 'empresasOfertas/admin', 'OFERTAS', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(24, 23, 'empresasOfertas/create', 'Crear Oferta', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'add-graduado.jpg'),
+(25, 23, 'empresasOfertas/admin', 'Ver Ofertas', 3, 0, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(26, 1, '', 'ENCUESTAS', 9, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(27, 26, 'encuestaEstatica/encuestaGeneralView', 'Encuesta General', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(28, 26, 'encuestaEstatica/encuestaViejaView', 'Años Anteriores', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(29, 26, 'encuestaEstatica/encuesta2005View', 'Graduados 2005', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(30, 26, 'encuestaEstatica/encuesta2006View', 'Graduados 2006', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(31, 26, 'encuestaDinamica/listaEncuesta/23', 'Graduados 2007', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(32, 26, 'encuestaDinamica/listaEncuesta/24', 'Graduados 2008', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(33, 26, 'encuestaDinamica/listaEncuesta/27', 'Graduados 2009', 2, NULL, 1, 'documents_slotlet_vidas  menu ', 'oferta-laboral.png'),
+(34, 26, 'encuestaDinamica/listaEncuesta/29', 'Graduados 2010', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(35, 26, 'encuestaDinamica/listaEncuesta/32', 'Graduados 2011', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(36, 26, 'encuestaDinamica/listaEncuesta/34', 'Graduados 2012', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(37, 26, 'encuestaDinamica/listaEncuesta/26', 'ENCUESTA DE GRADO 2010', 2, NULL, 1, 'menu ', 'oferta-laboral.png'),
+(38, 26, 'encuestaDinamica/listaEncuesta/28', 'ENCUESTA DE GRADO 2011', 2, NULL, 1, 'menu ', 'oferta-laboral.png'),
+(39, 26, 'encuestaDinamica/listaEncuesta/30', 'ENCUESTA DE GRADO 2012', 2, NULL, 1, ' menu ', 'oferta-laboral.png'),
+(40, 26, 'encuestaDinamica/listaEncuesta/33', 'ENCUESTA DE GRADO 2013', 2, NULL, 1, 'menu ', 'oferta-laboral.png'),
+(41, 26, 'encuestaDinamica/listaEncuesta/35', 'ENCUESTA DE GRADO 2014', 2, NULL, 1, 'menu ', 'oferta-laboral.png'),
+(42, 26, 'encuestaDinamica/listaEncuesta/31', 'ENCUESTA-TRAYECTORIAS LABORALES', 2, NULL, 1, 'menu ', 'oferta-laboral.png'),
+(43, 26, 'encuestaDinamica/listaEncuesta/25', 'UNLP-UIGLP-FELP', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(5, 3, 'graduados/createAndPoll', 'Nuevo c/Encuesta', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'add-graduado.jpg'),
+(46, 1, '', 'ARTICULOS RELACIONADOS', 11, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(47, 46, 'articulosRelacionados/create', 'Crear Articulo', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(48, 46, 'articulosRelacionados/admin', 'Buscar Articulo', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(49, 1, '', 'NOTICIAS', 10, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(50, 49, 'noticias/create', 'Crear Noticia', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(51, 49, 'noticias/admin', 'Buscar Noticia', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(52, 1, 'empresasOfertas/admin', 'SEGUIMIENTO OFERTAS', 5, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(53, 52, 'empresasOfertas/viewSeguimientos', 'Ver Seguimientos', 3, 0, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(54, 1, 'citas/admin', 'CITAS', 6, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(55, 54, 'citas/index', 'Ver Calendario', 3, 0, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(56, 54, 'citas/admin', 'Ver Citas Grilla', 3, 0, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(57, 54, 'citas/create', 'Crear Cita', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(58, 1, 'cursos/index', 'CURSOS', 7, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(59, 58, 'cursos/create', 'Crear Curso', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(60, 58, 'cursos/index', 'Buscar Curso', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(61, 1, 'convenioMarco/buscar', 'CONVENIOS', 3, NULL, 1, ' documents_slotlet_vidas menu ', 'folder-expanded.gif'),
+(62, 61, 'convenioMarco/create', 'Crear Convenio Marco', 2, NULL, 1, ' documents_slotlet_vidas menu ', 'oferta-laboral.png'),
+(63, 61, 'convenioMarco/buscar', 'Buscar Convenio Marco', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(64, 61, 'convenioMarco/listar', 'Buscar Convenio Individual', 4, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(65, 61, 'derivaciones/admin', 'Derivaciones', 5, NULL, 1, ' documents_slotlet_vidas menu ', 'perfil.jpg'),
+(66, 61, 'convenioMarco/actualizarFacultadesMails', 'Mails Facultades', 5, NULL, 1, 'documents_slotlet_vidas menu ', 'mail.png');
+
+
+UPDATE `polls` SET `encuesta_de_grado` = '0' WHERE `id` =32 LIMIT 1;
+update questions q set q.determinado_resp=(select determinado_por from  answers an where  an.id_pregunta=q.id limit 1 ) where q.id in (select an.id_pregunta from  answers an where  an.determinado_por <> '');
+
+update `profesionales` SET dni = REPLACE (dni, '.', '');
+ALTER TABLE `usuarios_entrevistas` ADD `id_modelo` INT NULL;
+
+
+--
+-- Estructura de tabla para la tabla `usuarios_entrevistas_inst_modelos`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_entrevistas_inst_modelos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_usuarios_entrevistas` int(11) NOT NULL,
+  `id_usuarios_entrevistas_items` int(11) NOT NULL,
+  `puntaje` int(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_entrevistas_items`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_entrevistas_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  `nombre_corto` varchar(50) NOT NULL,
+  `descripcion` varchar(500) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_entrevistas_items`
+--
+
+INSERT INTO `usuarios_entrevistas_items` (`id`, `nombre`, `nombre_corto`, `descripcion`) VALUES
+(1, 'Organizado', 'Organizado', 'Es la capacidad de fijar metas y prioridades a la hora de realizar una tarea, para lo cual se estudian previamente las acciones y objetivos'),
+(2, 'Lógico', 'Lógico', 'Es la capacidad de relacionar y jerarquizar conceptos, y a partir de ellos se construir conclusiones o juicios'),
+(3, 'Estratega', 'Estratega', 'Es la habilidad para comprender rápidamente los cambios de entorno, las oportunidades del mercado, las amenazas competitivas y las fortalezas y debilidades de la propia organización'),
+(4, 'Competitivo', 'Competitivo', 'Es la capacidad de superarse a si mismo'),
+(5, 'Perfeccionista', 'Perfeccionista', 'Es la capacidad de poseer autocontrol frente a sus impulsos, son personas ordenadas y planean cada paso que dan'),
+(6, 'Analista', 'Analista', 'Es la capacidad general que tiene una persona para realizar un análisis lógico. La capacidad de identificar los problemas, reconocer la información significativa buscar y coordinar los datos relevantes'),
+(7, 'Independiente', 'Independiente', 'Supone la capacidad de poder tomar decisiones y realizar tareas de manera autónoma'),
+(8, 'Responsable', 'Responsable', 'Esta competencia está asociada al compromiso con que las personas realizan las tareas encomendadas. Su preocupación por el cumplimiento de lo asignado está por encima de sus propios intereses, la tarea asignada está primero'),
+(9, 'Negociador', 'Negociador', 'Habilidad para crear un ambiente propicio para la colaboración y lograr compromisos duraderos que fortalezcan la relacion'),
+(10, 'Persuasivo', 'Persuasivo', 'Capacidad de producir un impacto o efecto determinado sobre los demás, convencerlos, influir en ellos o impresionarlos con el fin de lograr que ejecuten determinadas acciones'),
+(11, 'Entusiasta', 'Entusiasta', 'Implica la capacidad de motivarse y motivar a sus compañeros o empleados'),
+(12, 'Trabaja en equipo', 'Trabaja en equipo', 'Implica la capacidad de colaborar  y cooperar con los demas, de formar parte de un grupo y trabajar juntos'),
+(13, 'Dinámico', 'Dinámico', 'Se trata de la habilidad para trabajar duro en situaciones cambiantes o alternativas, con interlocutores muy diversos, que cambian en cortos espacios de tiempo, y en jornadas de trabajo prolongadas, sin que por esto se vea afectado su nivel de actividad'),
+(14, 'Orientación al Cliente', 'Orientación al Cliente', 'Implica un deseo de ayudar o servir al cliente, de comprender y satisfacer sus necesidades, aun aquellas no expresadas'),
+(15, 'Orientación a los Resultados', 'Orientación al Resultado', 'Es la capacidad de encaminar todos los actos al logro de lo esperado, actuando con velocidad y sentido de urgencia ante decisiones importantes, necesarias para satisfacer las necesidades del cliente, superar a los competidores o mejorar la organización'),
+(16, 'Planificador', 'Planificador', 'Es la capacidad de fijar metas y prioridades a la hora de realizar una tarea, para lo cual se estudian previamente las acciones y objetivos'),
+(17, 'Autosuficiente', 'Autosuficiente', 'Es la capacidad de realizar las tareas de manera autónoma, lo cual no significa estar aislado del entorno laboral'),
+(18, 'Flexible', 'Flexible', 'Disposición para adaptarse fácilmente y trabajar en distintas y variadas situaciones y con personas y grupos diversos'),
+(19, 'Impulsor', 'Impulsor', 'Es la predisposición de actuar proactivamente y a pensar no sólo lo que hay que hacer en el futuro'),
+(20, 'Observador', 'Observador', 'Es la capacidad de prestar mucha atención a una cosa/persona con detenimiento para adquirir algún conocimiento'),
+(21, 'Metódico', 'Metódico', 'Implica la capacidad de seguir procedimientos en su tarea diaria'),
+(22, 'Proactivo', 'Proactivo', 'Supone la iniciativa y capacidad para anticiparse a problemas o necesidades futuras'),
+(23, 'Preciso', 'Preciso', 'Implica la capacidad de ser exacto, riguroso y determinante en la tarea'),
+(24, 'Perseverante', 'Perseverante', 'Firmeza y constancia en la ejecución de los negocios. Es la predisposición a mantenerse firme y constante en la prosecución de acciones y emprendimientos de manera estable o continua hasta lograr el objetivo'),
+(25, 'Cooperativo', 'Cooperativo', 'Es la capacidad de cooperar de manera espontánea con su grupo de trabajo para el logro de un bien común'),
+(26, 'Atento', 'Atento', 'Esta competencia implica un alerta constante por parte del empleado en sus tareas cotidianas');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_entrevistas_modelos`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_entrevistas_modelos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `modelo` varchar(60) NOT NULL,
+  `nombre_corto` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_entrevistas_modelos`
+--
+
+INSERT INTO `usuarios_entrevistas_modelos` (`id`, `modelo`, `nombre_corto`) VALUES
+(1, 'ADMINISTRATIVO', 'ADMINISTRATIVO'),
+(2, 'COMERCIALIZACION', 'COMERCIALIZACION'),
+(3, 'INVESTIGACION', 'INVESTIGACION'),
+(4, 'OPERACIÓN', 'OPERACIÓN'),
+(5, 'PRODUCCION', 'PRODUCCION');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios_entrevistas_modelo_item`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_entrevistas_modelo_item` (
+  `id_usuarios_entrevistas_modelos` int(11) NOT NULL,
+  `id_usuarios_entrevistas_item` int(11) NOT NULL,
+  `orden` int(11) NOT NULL DEFAULT '0',
+  `visible` int(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id_usuarios_entrevistas_modelos`,`id_usuarios_entrevistas_item`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuarios_entrevistas_modelo_item`
+--
+
+INSERT INTO `usuarios_entrevistas_modelo_item` (`id_usuarios_entrevistas_modelos`, `id_usuarios_entrevistas_item`, `orden`, `visible`) VALUES
+(1, 1, 1, 1),
+(1, 2, 2, 1),
+(1, 3, 3, 1),
+(1, 4, 4, 1),
+(1, 5, 5, 1),
+(1, 6, 6, 1),
+(1, 7, 7, 1),
+(1, 8, 8, 1),
+(2, 8, 2, 1),
+(2, 9, 1, 1),
+(2, 10, 3, 1),
+(2, 11, 4, 1),
+(2, 12, 5, 1),
+(2, 13, 6, 1),
+(2, 14, 7, 1),
+(2, 15, 8, 1),
+(3, 8, 5, 1),
+(3, 16, 1, 1),
+(3, 17, 2, 1),
+(3, 18, 3, 1),
+(3, 19, 4, 1),
+(3, 20, 6, 1),
+(3, 21, 7, 1),
+(4, 7, 6, 1),
+(4, 8, 1, 1),
+(4, 20, 4, 1),
+(4, 22, 2, 1),
+(4, 23, 3, 1),
+(4, 24, 5, 1),
+(4, 26, 7, 1),
+(5, 1, 6, 1),
+(5, 5, 5, 1),
+(5, 8, 4, 1),
+(5, 17, 3, 1),
+(5, 21, 8, 1),
+(5, 24, 2, 1),
+(5, 25, 1, 1),
+(5, 26, 7, 1);
+
+ALTER TABLE `usuarios_entrevistas` ADD `puntual` INT( 1 ) NOT NULL DEFAULT '1',
+ADD `buena_presencia` INT( 1 ) NOT NULL DEFAULT '1';
+
+ALTER TABLE `usuarios_entrevistas` ADD `id_remuneracion` INT NULL;
+
+--
+-- Estructura de tabla para la tabla `usuarios_escalas_remuneracion`
+--
+
+CREATE TABLE IF NOT EXISTS `usuarios_escalas_remuneracion` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `monto` int(10) DEFAULT NULL,
+  `descripcion` varchar(250) NOT NULL,
+  `orden` int(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Volcado de datos para la tabla `usuarios_escalas_remuneracion`
+--
+
+INSERT INTO `usuarios_escalas_remuneracion` (`id`, `monto`, `descripcion`, `orden`) VALUES
+(1, 2000, 'Menos de $2000', 1),
+(2, 2500, 'Entre $2000 y $2500', 2),
+(3, 3000, 'Entre $2500 y $3000', 3),
+(4, 4000, 'Entre $3000 y $4000', 4),
+(5, 5000, 'Entre $4000 y $5000', 5),
+(6, 6000, 'Entre $5000 y $6000', 6),
+(7, 8000, 'Entre $6000 y $8000', 7),
+(8, 10000, 'Entre $8000 y $10000', 8),
+(9, 12000, 'Entre $10000 y $12000', 9),
+(10, 15000, 'Más de $12000', 10);
+
+ALTER TABLE `usuarios_disponibilidad` ADD COLUMN `turno_rotativo` TINYINT(1)  NOT NULL AFTER `id_registro`;
+ALTER TABLE `usuarios_entrevistas` ADD COLUMN `lenguaje_formal` INT(1)  NOT NULL DEFAULT 1 AFTER `id_modelo`;
+ALTER TABLE `graduados` ADD COLUMN `edad` MEDIUMINT(2)  AFTER `fecha_ingreso`;

@@ -1,0 +1,161 @@
+
+<p class="error">
+	Campos con <span class="required">*</span> son obligatorios.
+</p>
+
+<?php echo $form->errorSummary($model); ?>
+
+<div class="contenedor-tabla">
+
+	<div class="contenedor-fila">
+		<div class="contenedor-columna-30">
+			<label>Código/Número de Obra</label>
+<?php echo $form->textField($model,'Codigo'); ?>
+<?php echo $form->error($model,'Codigo'); ?>
+	</div>
+
+		<div class="contenedor-columna-30">
+		<?php echo $form->labelEx($model,'Nombre'); ?>
+<?php echo $form->textField($model,'Nombre',array('size'=>70,'maxlength'=>120)); ?>
+<?php echo $form->error($model,'Nombre'); ?>
+	</div>
+	</div>
+
+
+	<div class="contenedor-fila">
+		<div class="contenedor-columna-70">
+		<?php echo $form->labelEx($model,'Direccion'); ?>
+<?php echo $form->textField($model,'Direccion',array('size'=>60,'maxlength'=>100)); ?>
+<?php echo $form->error($model,'Direccion'); ?>
+	</div>
+
+		<div class="contenedor-columna-20">
+		<?php echo $form->labelEx($model,'Localidad'); ?>
+<?php echo $form->textField($model,'Localidad',array('size'=>28,'maxlength'=>100)); ?>
+<?php echo $form->error($model,'Localidad'); ?>
+	</div>
+	</div>
+	<div class="contenedor-fila">
+		<div class="contenedor-columna">
+			<label for="Cliente">Cliente Contratante</label><?php
+			$this->widget ( 'application.components.Relation', array (
+					'model' => $model,
+					'relation' => 'cliente',
+					'fields' => 'descripcion',
+					'allowEmpty' => false,
+					'style' => 'dropdownlist',
+					'showAddButton' => false,
+					'htmlOptions' => array (
+							'style' => 'width:440px !important' 
+					) 
+			) );
+			?>
+			</div>
+	</div>
+	<div class="contenedor-fila">
+		<div class="contenedor-columna-30">
+			<label>Monto de Contrato</label>
+<?php echo $form->textField($model,'Monto',array('size'=>18,'maxlength'=>18)); ?>
+<?php echo $form->error($model,'Monto'); ?>
+	</div>
+
+		<div class="contenedor-columna-20">
+		<?php echo $form->labelEx($model,'FechaInicio'); ?>
+<?php
+
+		$this->widget ( 'zii.widgets.jui.CJuiDatePicker', array (
+				'model' => '$model',
+				'name' => 'Obra[FechaInicio]',
+				// 'language'=>'de',
+				'value' => $model->FechaInicio,
+				'htmlOptions' => array (
+						'size' => 10,
+						'style' => 'width:80px !important' 
+				),
+				'options' => array (
+						'showButtonPanel' => true,
+						'changeYear' => true,
+						'changeYear' => true,
+						'dateFormat' => 'yy-mm-dd',
+						'altFormat' => 'dd-mm-yy' 
+				) 
+		) );
+		;
+		?>
+<?php echo $form->error($model,'FechaInicio'); ?>
+	</div>
+
+		<div class="contenedor-columna-20">
+			<label>Fecha de Entrega</label>
+<?php
+
+$this->widget ( 'zii.widgets.jui.CJuiDatePicker', array (
+		'model' => '$model',
+		'name' => 'Obra[FechaFin]',
+		// 'language'=>'de',
+		'value' => $model->FechaFin,
+		'htmlOptions' => array (
+				'size' => 10,
+				'style' => 'width:80px !important' 
+		),
+		'options' => array (
+				'showButtonPanel' => true,
+				'changeYear' => true,
+				'changeYear' => true,
+				'dateFormat' => 'yy-mm-dd',
+				'altFormat' => 'dd-mm-yy' 
+		) 
+) );
+;
+?>
+<?php echo $form->error($model,'FechaFin'); ?>
+	</div>
+		<div class="contenedor-columna-20">
+			<label>Días de Obra</label>
+<?php echo $form->textField($model,'Avance',array('size'=>8,'maxlength'=>10)); ?>
+<?php echo $form->error($model,'Avance'); ?>
+	</div>
+	</div>
+
+	<div class="contenedor-fila">
+		<div class="contenedor-columna-40">
+			<label for="Empresas">Empresa ejecutante</label><?php
+			$this->widget ( 'application.components.Relation', array (
+					'model' => $model,
+					'relation' => 'empresa',
+					'fields' => 'nombre',
+					'allowEmpty' => false,
+					'style' => 'dropdownlist',
+					'showAddButton' => false 
+			) );
+			?>
+			</div>
+		<div class="contenedor-columna-30">
+			<label for="TipoObra">Tipo de Contratación</label><?php
+			$this->widget ( 'application.components.Relation', array (
+					'model' => $model,
+					'relation' => 'tipoObra',
+					'fields' => 'nombre',
+					'allowEmpty' => false,
+					'style' => 'dropdownlist',
+					'showAddButton' => false 
+			) );
+			?>
+			</div>
+		<div class="contenedor-columna-30">
+			<label>Valor de Justiprecio</label>
+<?php echo $form->textField($model,'Justiprecio',array('size'=>10,'maxlength'=>10)); ?>
+<?php echo $form->error($model,'Justiprecio'); ?>
+	</div>
+
+	</div>
+	<div class="contenedor-fila">
+		<div class="contenedor-columna-30">
+			<label>Acuerdos Especiales</label>
+<?php echo $form->textArea($model, "Detalles", array('style'=>'width: 720px; height: 100px;')); ?>
+<?php echo $form->error($model,'Detalles'); ?>
+	</div>
+	</div>
+
+
+</div>

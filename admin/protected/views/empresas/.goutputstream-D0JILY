@@ -1,0 +1,16 @@
+<div class="titulo">Empresa: <?php echo $model->nombre; ?></div>
+
+<?php $this->widget('zii.widgets.CDetailView', array(
+	'data'=>$model,
+	'attributes'=>array(
+		'nombre',
+		'codigo',
+		'cuit',
+		'inicio_actividad',
+		'razon_social',
+	),
+)); ?>
+<div class="row-center">
+	<?php echo CHtml::submitButton(Yii::t('app', 'Volver'),array('class'=>'btn btn-primary')); ?>
+</div>
+

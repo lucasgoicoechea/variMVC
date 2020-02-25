@@ -1,0 +1,728 @@
+
+<HTML>
+<HEAD>
+<TITLE>AMIA - Servicio de Empleo</TITLE>
+<link REL="stylesheet" TYPE="text/css"
+	HREF="http://www.empleos.amia.org.ar/estilos/estilos.css">
+<link Rel="StyleSheet" Type="text/css"
+	HRef="http://www.empleos.amia.org.ar/estilos/menu.css">
+<script Language="JavaScript1.2" Src="/funciones/coolmenus4.js"></script>
+<style>
+.clCMEvent {
+	position: absolute;
+	width: 99%;
+	height: 99%;
+	clip: rect(0, 100%, 100%, 0);
+	left: 0;
+	top: 0;
+	visibility: visible
+}
+
+.clCMAbs {
+	position: absolute;
+	visibility: hidden;
+	left: 0;
+	top: 0
+}
+
+.clborder {
+	position: absolute;
+	visibility: hidden;
+	background-color: white;
+	layer-background-color: white
+}
+
+.clBar {
+	position: absolute;
+	width: 15;
+	height: 10;
+	visibility: hidden
+}
+
+.clFondo {
+	background-color: #cccccc;
+	layer-background-color: #cccccc
+}
+
+.clLevel0,.clLevel0over {
+	FONT-FAMILY: "Arial";
+	COLOR: "#FFFFFF";
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: BOLD;
+	text-decoration: none;
+	position: absolute;
+	padding: 2px;
+	padding: 5px 0px 0px;
+	cursor: hand;
+}
+
+.clLevel0 {
+	background-color: #5388BC;
+	layer-background-color: #5388BC;
+}
+
+.clLevel0over {
+	background-color: #004890;
+	layer-background-color: #004890;
+}
+
+.clLevel0border {
+	position: absolute;
+	visibility: hidden;
+	background-color: #FFFFFF;
+	layer-background-color: #FFFFFF
+}
+
+.clLevel0small,.clLevel0smallover,.clLevel0small1,.clLevel0small2,.clLevel0small3,.clLevel0small4,.clLevel0small1over,.clLevel0small2over,.clLevel0small3over,.clLevel0small4over
+	{
+	FONT-FAMILY: "Arial";
+	COLOR: "#FFFFFF";
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: BOLD;
+	text-decoration: none;
+	position: absolute;
+	text-transform: uppercase;
+	padding: 3px 0px 0px 0px;
+	cursor: hand;
+}
+
+.clLevel0small,.clLevel0small1,.clLevel0small2,.clLevel0small3,.clLevel0small4
+	{
+	background-color: #669ACC;
+	layer-background-color: #669ACC;
+}
+
+.clLevel0smallover,.clLevel0small1over,.clLevel0small2over,.clLevel0small3over,.clLevel0small4over
+	{
+	background-color: #669ACC;
+	layer-background-color: #004890;
+}
+
+.clLevel0smallborder,.clLevel0small1border,.clLevel0small2border,.clLevel0small3border,.clLevel0small4border
+	{
+	position: absolute;
+	visibility: hidden;
+	background-color: #FFFFFF;
+	layer-background-color: #FFFFFF;
+	cursor: hand;
+}
+
+.clLevel0small1,.clLevel0small1over {
+	background: url(/Images/fondo1.gif) no-repeat left top;
+}
+
+.clLevel0small2,.clLevel0small2over {
+	background: url(/Images/fondo2.gif) no-repeat left top;
+}
+
+.clLevel0small3,.clLevel0small3over {
+	background: url(/Images/fondo3.gif) no-repeat left top;
+}
+
+.clLevel0small4,.clLevel0small4over {
+	background: url(/Images/fondo4.gif) no-repeat left top;
+}
+
+.clLevel0seccion,.clLevel0seccionover,.clLevel0seccion1,.clLevel0seccion2,.clLevel0seccion3,.clLevel0seccion4,.clLevel0seccion1over,.clLevel0seccion2over,.clLevel0seccion3over,.clLevel0seccion4over
+	{
+	FONT-FAMILY: "Arial";
+	COLOR: "#FFFFFF";
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: BOLD;
+	text-decoration: none;
+	position: absolute;
+	text-transform: uppercase;
+	padding: 3px 0px 0px 0px;
+	cursor: hand;
+}
+
+.clLevel0seccion,.clLevel0seccion1,.clLevel0seccion2,.clLevel0seccion3,.clLevel0seccion4
+	{
+	FONT-FAMILY: "Arial";
+	COLOR: "#FFFFFF";
+	FONT-SIZE: 11px;
+	FONT-WEIGHT: BOLD;
+	text-decoration: NONE;
+	background-color: #669ACC;
+	layer-background-color: #669ACC;
+	color: #FFFFFF;
+	cursor: hand;
+}
+
+.clLevel0seccionover,.clLevel0seccion1over,.clLevel0seccion2over,.clLevel0seccion3over,.clLevel0seccion4over
+	{
+	FONT-FAMILY: "Trebuchet MS";
+	COLOR: "#FFFFFF";
+	FONT-SIZE: 12px;
+	FONT-WEIGHT: BOLD;
+	text-decoration: NONE;
+	background-color: #669ACC;
+	layer-background-color: #004890;
+	color: #FFFFFF;
+	cursor: hand;
+}
+
+.clLevel0seccionborder,.clLevel0seccion1border,.clLevel0seccion2border,.clLevel0seccion3border,.clLevel0seccion4border
+	{
+	position: absolute;
+	visibility: hidden;
+	background-color: #FFFFFF;
+	layer-background-color: #FFFFFF;
+	cursor: hand;
+}
+
+.clLevel0seccion1,.clLevel0seccion1over {
+	background: url(/Images/fondo1_selected.gif) no-repeat left top;
+}
+
+.clLevel0seccion2,.clLevel0seccion2over {
+	background: url(/Images/fondo2_selected.gif) no-repeat left top;
+}
+
+.clLevel0seccion3,.clLevel0seccion3over {
+	background: url(/Images/fondo3_selected.gif) no-repeat left top;
+}
+
+.clLevel0seccion4,.clLevel0seccion4over {
+	background: url(/Images/fondo4_selected.gif) no-repeat left top;
+}
+
+.clLevel1,.clLevel1over {
+	position: absolute;
+	font-size: 10px;
+	font-family: "Verdana";
+	background-repeat: repeat-x;
+	background-position: bottom left;
+	padding: 5px 0px 0px;
+	cursor: hand;
+}
+
+.clLevel1 {
+	background-color: #D4E4F3;
+	layer-background-color: #D4E4F3;
+	color: #004890;
+	font-size: 10px;
+	font-family: "Verdana";
+}
+
+.clLevel1over {
+	background-color: #D4E4F3;
+	layer-background-color: #97B7D4;
+	FONT-WEIGHT: none;
+	color: #ef0073;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.clLevel1border {
+	position: absolute;
+	background-color: #D4E4F3;
+	layer-background-color: #D4E4F3;
+	border: 1px solid #1E5E9E;
+	cursor: hand;
+}
+
+.clLevel2,.clLevel2over {
+	position: absolute;
+	font-size: 10px;
+	font-family: "Verdana";
+	background-repeat: repeat-x;
+	background-position: bottom left;
+	padding: 5px 0px 0px;
+	cursor: hand;
+}
+
+.clLevel2 {
+	background-color: #D4E4F3;
+	layer-background-color: #D4E4F3;
+	color: #004890;
+	font-size: 10px;
+	font-family: "Verdana";
+}
+
+.clLevel2over {
+	background-color: #D4E4F3;
+	layer-background-color: #97B7D4;
+	FONT-WEIGHT: none;
+	color: #ef0073;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.clLevel2border {
+	position: absolute;
+	background-color: #D4E4F3;
+	layer-background-color: #D4E4F3;
+	border: 1px solid #1E5E9E;
+	cursor: hand;
+}
+
+.clLevel3,.clLevel3over {
+	position: absolute;
+	font-size: 10px;
+	font-family: "Verdana";
+	background-repeat: repeat-x;
+	background-position: bottom left;
+	padding: 5px 0px 0px;
+	cursor: hand;
+}
+
+.clLevel3 {
+	background-color: #D4E4F3;
+	layer-background-color: #D4E4F3;
+	color: #004890;
+	font-size: 10px;
+	font-family: "Verdana";
+}
+
+.clLevel3over {
+	background-color: #D4E4F3;
+	layer-background-color: #97B7D4;
+	FONT-WEIGHT: none;
+	color: #ef0073;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.clLevel3border {
+	position: absolute;
+	background-color: #D4E4F3;
+	layer-background-color: #D4E4F3;
+	border: 1px solid #1E5E9E;
+	cursor: hand;
+}
+</style>
+<Script Language="JavaScript">
+			function SetUser(userName)
+			{
+				document.getElementById("NombreUsuario").innerText = userName;
+			}
+		</Script>
+</HEAD>
+<BODY TOPMARGIN="0" LEFTMARGIN="0">
+	<!--ACA COMIENZA LA TABLA GENERICA DEL ANCHO DE PAGINA-->
+	<TABLE WIDTH="754" CELLPADDING="0" CELLSPACING="0" border=0>
+		<TR>
+			<TD>
+				<!--ACA COMIENZA LA TABLA DEL HEADER-->
+				<TABLE CELLPADDING="0" CELLSPACING="0" WIDTH="100%" border="0">
+					<TR>
+						<TD>
+							<!--Esta tabla contiene: Logo - Mapa del sitio - Banner - Botonera principal-->
+							<Table cellpadding="0" cellspacing="0" border="0" width="754"
+								ID="Table4">
+								<Tr>
+									<Td colspan="5" bgcolor="#FFFFFF"><IMG
+										SRC="http://www.empleos.amia.org.ar/Images/t.gif" WIDTH="1"
+										HEIGHT="13" Border="0"></Td>
+								</Tr>
+								<Tr>
+									<td width="1" bgcolor="#FFFFFF"><IMG
+										SRC="http://www.empleos.amia.org.ar/Images/t.gif" WIDTH="20"
+										HEIGHT="1" Border="0"></td>
+									<Td width="1" align="left" valign="Middle" bgcolor="FFFFFF"><a
+										href="/default.asp"><img
+											src="http://www.empleos.amia.org.ar/Images/header/logo.gif"
+											border="0"></a></Td>
+									<td width="1" bgcolor="#FFFFFF"><IMG
+										SRC="http://www.empleos.amia.org.ar/Images/t.gif" WIDTH="110"
+										HEIGHT="1" Border="0"></td>
+									<Td width="468" align="Right" height="62" valign="top"
+										bgcolor="#FFFFFF"><a
+										href="http://www.empleos.amia.org.ar/bannerRedirect.asp?bannerId=121"
+										border="0" target="_blank"> <object
+												classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+												type="application/x-shockwave-flash"
+												data="http://www.empleos.amia.org.ar/recursos/trabajoregistrado468x651.swf"
+												width="468" height="60"
+												codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0">
+												<param name="movie"
+													value="http://www.empleos.amia.org.ar/recursos/trabajoregistrado468x651.swf?bannerId=121" />
+												<param name="wmode" value="transparent">
+												<EMBED
+													src="http://www.empleos.amia.org.ar/recursos/trabajoregistrado468x651.swf?bannerId=121"
+													quality=high bgcolor=#FFFFFF width="468" height="60"
+													ALIGN="" TYPE="application/x-shockwave-flash"
+													PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"
+													wmode="transparent"></EMBED>
+											</object>
+									</a></td>
+								</Tr>
+							</Table> <!--HASTA AQUI - Esta tabla contiene: Logo - Banner - Botonera principal-->
+						</TD>
+					</TR>
+					<TR>
+						<td><IMG SRC="http://www.empleos.amia.org.ar/Images/t.gif"
+							WIDTH="1" HEIGHT="10" Border="0"></td>
+					</TR>
+					<TR>
+						<TD>
+							<!--EN ESTA TABLA SE ENCUENTRA LA BOTONERA PRINCIPAL Y LA FECHA-->
+							<Table cellpadding="0" cellspacing="0" border="0" Align="right"
+								ID="Table3">
+								<Tr>
+									<Td align="left" colspan="2" valign="top">
+										<div id="divMenu">
+											<Table cellpadding="0" cellspacing="0" border="0"
+												width="100%" ID="Table5">
+												<Tr>
+													<td><a
+														href="javascript: var recentTips = window.open('/faqs.asp?Volver=NO&Cerrar=SI', 'Ayuda', 'height=450,width=600,status=no,toolbar=no,menubar=no,location=no,scrollbars=no');"><IMG
+															SRC="http://www.empleos.amia.org.ar/Images/header/ayuda.gif"
+															ALT="" BORDER="0"></a></td>
+													<Td width="1"><IMG
+														SRC="http://www.empleos.amia.org.ar/Images/t.gif"
+														WIDTH="11" HEIGHT="1" Border="0"></Td>
+													<!-- SEPARADOR LARGO -->
+													<td><IMG
+														SRC="http://www.empleos.amia.org.ar/Images/t.gif"
+														WIDTH="100" HEIGHT="1" Border="0"></td>
+													<td><IMG
+														SRC="http://www.empleos.amia.org.ar/Images/t.gif"
+														WIDTH="10" HEIGHT="1" Border="0"></td>
+													<!-- /SEPARADOR LARGO-->
+													<td nowrap valign="bottom"><IMG
+														SRC="http://www.empleos.amia.org.ar/Images/box/tit-bullet.gif"
+														ALT="" BORDER="0"> <font face="Verdana"
+														Style="Font-size: 10px" Color="#003366">28 de Junio
+															de 2007</td>
+												</Tr>
+											</Table>
+										</div>
+									</Td>
+								</Tr>
+								<Tr>
+									<td
+										background="http://www.empleos.amia.org.ar/Images/header/spliterhome.gif"><IMG
+										SRC="http://www.empleos.amia.org.ar/Images/t.gif" WIDTH="1"
+										HEIGHT="1" Border="0"></td>
+								</tr>
+							</table>
+							<br>
+							<Table cellpadding="0" cellspacing="0" border="0" Width="100%"
+								ID="Table2">
+								<Tr>
+									<Td bgcolor="#2469AC" Class="FechaClass" Align="Right"
+										ID=NombreUsuario>
+										<Form name="formLogOut"
+											action="http://www.empleos.amia.org.ar" method="POST"
+											id="Formulario" style="margin: 0px 0px 0px 0px">
+											<Input type="Hidden" id="Hidden1" name="hDestruir" value="0">
+											<IMG SRC="http://www.empleos.amia.org.ar/Images/t.gif"
+												WIDTH="1" HEIGHT="12" Border="0">
+										</Form>
+									</Td>
+								</Tr>
+							</Table> <!--FIN DE: EN ESTA TABLA SE ENCUENTRA LA BOTONERA PRINCIPAL Y LA FECHA-->
+						</TD>
+					</TR>
+				</TABLE> <!--ACA TERMINA LA TABLA DEL HEADER-->
+
+				<TABLE CELLPADDING="0" CELLSPACING="0" border="0" WIDTH="100%"
+					height="100%" ID="Table4">
+					<TR>
+						<TD VALIGN="TOP" WIDTH="100%" valign="top">
+							<table border="0" cellpadding="0" cellspacing="0"
+								style="margin: 5px 0px; table-layout: fixed;" ID="Table1">
+								<tr>
+									<td width="562">
+										<table border="0" cellpadding="0" cellspacing="0" width="100%">
+											<tr>
+												<td valign="top">
+													<table width="100%" height="100%" border="0"
+														cellpadding="0" cellspacing="0">
+														<tr height="108" valign="top">
+															<td><a
+																href="http://www.empleos.amia.org.ar/bannerRedirect.asp?bannerId=84"
+																border="0" target="_blank"> <object
+																		classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+																		type="application/x-shockwave-flash"
+																		data="http://www.empleos.amia.org.ar/recursos/busca180x90.swf"
+																		width="180" height="90"
+																		codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0">
+																		<param name="movie"
+																			value="http://www.empleos.amia.org.ar/recursos/busca180x90.swf?bannerId=84" />
+																		<param name="wmode" value="transparent">
+																		<EMBED
+																			src="http://www.empleos.amia.org.ar/recursos/busca180x90.swf?bannerId=84"
+																			quality=high bgcolor=#FFFFFF width="180" height="90"
+																			ALIGN="" TYPE="application/x-shockwave-flash"
+																			PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"
+																			wmode="transparent"></EMBED>
+																	</object>
+															</a></td>
+														</tr>
+														<tr>
+															<td><a
+																href="http://www.empleos.amia.org.ar/bannerRedirect.asp?bannerId=85"
+																border="0" target="_blank"> <object
+																		classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+																		type="application/x-shockwave-flash"
+																		data="http://www.empleos.amia.org.ar/recursos/personal180x180.swf"
+																		width="180" height="180"
+																		codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0">
+																		<param name="movie"
+																			value="http://www.empleos.amia.org.ar/recursos/personal180x180.swf?bannerId=85" />
+																		<param name="wmode" value="transparent">
+																		<EMBED
+																			src="http://www.empleos.amia.org.ar/recursos/personal180x180.swf?bannerId=85"
+																			quality=high bgcolor=#FFFFFF width="180" height="180"
+																			ALIGN="" TYPE="application/x-shockwave-flash"
+																			PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"
+																			wmode="transparent"></EMBED>
+																	</object>
+															</a></td>
+														</tr>
+													</table>
+												</td>
+												<td><OBJECT
+														classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+														codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0"
+														width="376" height="288">
+														<PARAM NAME=movie VALUE="/images/home/introhome.swf">
+														<PARAM NAME=quality VALUE=high>
+														<PARAM NAME=bgcolor VALUE=#FFFFFF>
+														<param name="wmode" value="transparent">
+														<EMBED src="/images/home/introhome.swf" quality=high
+															bgcolor=#FFFFFF width="376" height="288" ALIGN=""
+															TYPE="application/x-shockwave-flash"
+															PLUGINSPAGE="http://www.macromedia.com/go/getflashplayer"
+															wmode="transparent"></EMBED>
+													</OBJECT></td>
+											</tr>
+										</table>
+									</td>
+									<td width="212">
+										<div id="CajaTemas">
+											<span class="titulo">Postulantes</span>
+											<div class="tema">
+												<table border="0" cellpadding="0" cellspacing="0"
+													style="margin: 0px;" ID="Table2" width="100%">
+													<tr>
+
+														<td width="46"><a
+															href="/curriculum.asp?Nuevo=1&IDSubSeccion=10&URL=/AutoConsulta/Registracion/Default.asp|pnuevo=1"><img
+																src="./images/01-off.gif"
+																onMouseOver="this.src='./images/01-on.gif';"
+																onMouseOut="this.src='./images/01-off.gif';" id="1"
+																border="0"></a></td>
+														<td><a class="titulo"
+															href="/curriculum.asp?Nuevo=1&IDSubSeccion=10&URL=/AutoConsulta/Registracion/Default.asp|pnuevo=1"
+															onMouseOver="document.getElementById('1').src='./images/01-on.gif';"
+															onMouseOut="document.getElementById('1').src='./images/01-off.gif';">Ingrese
+																su curriculum</a></td>
+														<td><a
+															href="/curriculum.asp?Nuevo=1&IDSubSeccion=10&URL=/AutoConsulta/Registracion/Default.asp|pnuevo=1"><img
+																src="./images/flecha_entrar.gif"
+																onMouseOver="document.getElementById('1').src='./images/01-on.gif';"
+																onMouseOut="document.getElementById('1').src='./images/01-off.gif';"
+																border="0"></a></td>
+													</tr>
+													<tr>
+														<td colspan="3"
+															style="background: url(./images/separador_bullet.gif) repeat-x; height: 3px;"></td>
+													</tr>
+													<tr>
+
+														<td><a href="/curriculum.asp?Nuevo=0&IDSubSeccion=11"><img
+																src="./images/02-off.gif"
+																onMouseOver="this.src='./images/02-on.gif';"
+																onMouseOut="this.src='./images/02-off.gif';" id="2"
+																border="0"></a></td>
+														<td><a class="titulo"
+															href="/curriculum.asp?Nuevo=0&IDSubSeccion=11"
+															onMouseOver="document.getElementById('2').src='./images/02-on.gif';"
+															onMouseOut="document.getElementById('2').src='./images/02-off.gif';">Actualice
+																su curriculum</a></td>
+														<td><a href="/curriculum.asp?Nuevo=0&IDSubSeccion=11"><img
+																src="./images/flecha_entrar.gif"
+																onMouseOver="document.getElementById('2').src='./images/02-on.gif';"
+																onMouseOut="document.getElementById('2').src='./images/02-off.gif';"
+																border="0"></a></td>
+													</tr>
+													<tr>
+														<td colspan="3"
+															style="background: url(./images/separador_bullet.gif) repeat-x; height: 3px;"></td>
+													</tr>
+													<tr>
+
+														<td><a
+															href="./AutoConsulta/Ofertas/Search.asp?IDSubSeccion=5"><img
+																src="./images/03-off.gif"
+																onMouseOver="this.src='./images/03-on.gif';"
+																onMouseOut="this.src='./images/03-off.gif';" id="3"
+																border="0"></a></td>
+														<td><a class="titulo"
+															href="./AutoConsulta/Ofertas/Search.asp?IDSubSeccion=5"
+															onMouseOver="document.getElementById('3').src='./images/03-on.gif';"
+															onMouseOut="document.getElementById('3').src='./images/03-off.gif';">ofertas
+																de trabajo</a></td>
+														<td><a
+															href="./AutoConsulta/Ofertas/Search.asp?IDSubSeccion=5"><img
+																src="./images/flecha_entrar.gif"
+																onMouseOver="document.getElementById('3').src='./images/03-on.gif';"
+																onMouseOut="document.getElementById('3').src='./images/03-off.gif';"
+																border="0"></a></td>
+													</tr>
+													<tr>
+														<td colspan="3"
+															style="background: url(./images/separador_bullet.gif) repeat-x; height: 3px;"></td>
+													</tr>
+													<tr>
+														<td><a href="./dicontenidos.asp?IDSubSeccion=141"><img
+																src="./images/06-off.gif"
+																onMouseOver="this.src='./images/06-on.gif';"
+																onMouseOut="this.src='./images/06-off.gif';" id="6"
+																border="0"></a></td>
+														<td><a class="titulo"
+															href="./dicontenidos.asp?IDSubSeccion=141"
+															onMouseOver="document.getElementById('6').src='./images/06-on.gif';"
+															onMouseOut="document.getElementById('6').src='./images/06-off.gif';">talleres
+																gratuitos</a></td>
+														<td><a href="./dicontenidos.asp?IDSubSeccion=141"><img
+																src="./images/flecha_entrar.gif"
+																onMouseOver="document.getElementById('6').src='./images/06-on.gif';"
+																onMouseOut="document.getElementById('6').src='./images/06-off.gif';"
+																border="0"></a></td>
+													</tr>
+													<tr>
+														<td colspan="3"
+															style="background: url(./images/separador_bullet.gif) repeat-x; height: 3px;"></td>
+													</tr>
+												</table>
+											</div>
+											<div id="Div1">
+												<span class="titulo">empresas</span>
+												<div class="tema">
+													<table border="0" cellpadding="0" cellspacing="0"
+														style="margin: 0px;" ID="Table3" width="100%">
+														<tr>
+															<td width="46"><a
+																href="./pedidos.asp?IDSubSeccion=14"><img
+																	src="./images/04-off.gif"
+																	onMouseOver="this.src='./images/04-on.gif';"
+																	onMouseOut="this.src='./images/04-off.gif';" id="4"
+																	border="0"></a></td>
+															<td><a class="titulo"
+																href="./pedidos.asp?IDSubSeccion=14"
+																onMouseOver="document.getElementById('4').src='./images/04-on.gif';"
+																onMouseOut="document.getElementById('4').src='./images/04-off.gif';">Pida
+																	personal on-line</a></td>
+															<td><a href="./pedidos.asp?IDSubSeccion=14"><img
+																	src="./images/flecha_entrar.gif"
+																	onMouseOver="document.getElementById('4').src='./images/04-on.gif';"
+																	onMouseOut="document.getElementById('4').src='./images/04-off.gif';"
+																	border="0"></a></td>
+														</tr>
+														<tr>
+															<td colspan="3"
+																style="background: url(./images/separador_bullet.gif) repeat-x; height: 3px;"></td>
+														</tr>
+														<tr>
+
+															<td><a
+																href="./nuestros-servicios.asp?IDSubSeccion=13"><img
+																	src="./images/05-off.gif"
+																	onMouseOver="this.src='./images/05-on.gif';"
+																	onMouseOut="this.src='./images/05-off.gif';" id="5"
+																	border="0"></a></td>
+															<td><a class="titulo"
+																href="./nuestros-servicios.asp?IDSubSeccion=13"
+																onMouseOver="document.getElementById('5').src='./images/05-on.gif';"
+																onMouseOut="document.getElementById('5').src='./images/05-off.gif';">servicios
+																	de RRHH</a></td>
+															<td><a
+																href="./nuestros-servicios.asp?IDSubSeccion=13"><img
+																	src="./images/flecha_entrar.gif"
+																	onMouseOver="document.getElementById('5').src='./images/05-on.gif';"
+																	onMouseOut="document.getElementById('5').src='./images/05-off.gif';"
+																	border="0"></a></td>
+														</tr>
+													</table>
+												</div>
+												<div>
+									</td>
+								</tr>
+							</table>
+
+						</TD>
+						<TD VALIGN="TOP" ALIGN="RIGHT">
+							<!--ACA COMIENZA LA COLUMNA DERECHA--> <input type="hidden"
+							id="muestra" value="0" NAME="muestra">
+							<TABLE ID="cDer" CELLPADDING="0" CELLSPACING="0" BORDER="0"
+								HEIGHT="100%" BGCOLOR="#E3EEF9">
+								<TR>
+									<TD><IMG
+										SRC="http://www.empleos.amia.org.ar/Images/t.gif" WIDTH="1"
+										HEIGHT="1" Border="0"></TD>
+									<TD valign="TOP">
+
+										<TABLE cellpadding="0" cellspacing="0">
+											<TR>
+												<TD></TD>
+											</TR>
+										</TABLE>
+
+									</TD>
+								</TR>
+							</TABLE>
+						</TD>
+						<!--ACA TERMINA LA COLUMNA DERECHA-->
+					</TR>
+
+				</TABLE>
+			</TD>
+		</TR>
+	</TABLE>
+	</TD>
+
+	<script>
+if (document.getElementById('muestra'))
+{
+	if (document.getElementById('muestra').value =='0')
+	{
+		document.getElementById('cDer').bgColor="#FFFFFF";
+	}
+}
+
+
+</script>
+	</TR>
+	</TABLE>
+	<!--ACA FINALIZA LA TABLA GENERICA DEL ANCHO DE PAGINA-->
+	<IFRAME FRAMEBORDER="0" SCROLLING="NO" SRC="/refresher.asp"
+		NORESIZE="NORESIZE" ALIGN="ABSBOTTOM" style="display: none"></IFRAME>
+</BODY>
+</HTML>
+
+<script>
+	function bannerURL(idBanner){
+		window.open("http://www.empleos.amia.org.ar/bannerRedirect.asp?bannerId=" + idBanner, "_blank");
+	}
+
+
+function findPos(){
+	if(bw.ns4){   //Netscape 4
+		x = document.layers.layerMenu.pageX
+		y = document.layers.layerMenu.pageY
+	}else{ //other browsers
+		x=0; y=0; var el,temp
+		el = bw.ie4?document.all["divMenu"]:document.getElementById("divMenu");
+		if(el.offsetParent){
+		temp = el
+		while(temp.offsetParent){ //Looping parent elements to get the offset of them as well
+			temp=temp.offsetParent;
+			x+=temp.offsetLeft
+			y+=temp.offsetTop;
+		}
+		}
+		x+=el.offsetLeft
+		y+=el.offsetTop
+	}
+	//Returning the x and y as an array
+	return [x,y]
+	}
+
+	var pos = findPos();
+	oCMenu1= new makeCM('oCMenu1');oCMenu1.frames = 0;oCMenu1.fromLeft = 12;oCMenu1.fromTop = pos[1];oCMenu1.rows = 1;oCMenu1.menuPlacement = 0;oCMenu1.useBar = 0;oCMenu1.pxBetween = 0;oCMenu1.resizeCheck = 0;oCMenu1.wait = 30;oCMenu1.fillImg = 't.gif';oCMenu1.zIndex = 0;oCMenu1.barWidth = 600;oCMenu1.barHeight = 22;oCMenu1.barClass = 'clBar';oCMenu1.barX = 0;oCMenu1.barY = 0;oCMenu1.barBorderX = 0;oCMenu1.barBorderY = 0;oCMenu1.barBorderClass = '';oCMenu1.level[0]=new cm_makeLevel();oCMenu1.level[0].height=19;oCMenu1.level[0].regClass='clLevel0small1';oCMenu1.level[0].overClass='clLevel0small1';oCMenu1.level[0].borderX=0;oCMenu1.level[0].borderY=0;oCMenu1.level[0].borderClass='clLevel0small1border';oCMenu1.level[0].offsetX=0;oCMenu1.level[0].offsetY=-1;oCMenu1.level[0].rows=0;oCMenu1.level[0].align='bottom';oCMenu1.level[1]=new cm_makeLevel();oCMenu1.level[1].height=20;oCMenu1.level[1].regClass='clLevel1';oCMenu1.level[1].overClass='clLevel1over';oCMenu1.level[1].borderX=0;oCMenu1.level[1].borderY=0;oCMenu1.level[1].borderClass='clLevel1border';oCMenu1.level[1].offsetX=127;oCMenu1.level[1].offsetY=-17oCMenu1.level[1].rows=0;oCMenu1.level[1].align='bottom';oCMenu1.level[2]=new cm_makeLevel();oCMenu1.level[2].height=20;oCMenu1.level[2].regClass='clLevel2';oCMenu1.level[2].overClass='clLevel2over';oCMenu1.level[2].borderX=0;oCMenu1.level[2].borderY=0;oCMenu1.level[2].borderClass='clLevel2border';oCMenu1.level[2].offsetX=oCMenu1.level[1].offsetX + oCMenu1.level[1].width;oCMenu1.level[2].offsetY=-17;oCMenu1.level[2].rows=0;oCMenu1.level[2].align='bottom';oCMenu1.level[3]=new cm_makeLevel();oCMenu1.level[3].height=20;oCMenu1.level[3].regClass='clLevel3';oCMenu1.level[3].overClass='clLevel3over';oCMenu1.level[3].borderX=0;oCMenu1.level[3].borderY=0;oCMenu1.level[3].borderClass='clLevel3border';oCMenu1.level[3].offsetX=oCMenu1.level[2].offsetX + oCMenu1.level[2].width;oCMenu1.level[3].offsetY=-16;oCMenu1.level[3].rows=0;oCMenu1.level[3].align='bottom';oCMenu1.makeMenu('01','01','<center>Postulantes</center>','','','95'); oCMenu1.makeMenu('05','01','&nbsp;Ofertas de Empleo','/Autoconsulta/Ofertas/Search.asp?IDSubSeccion=5','','128'); oCMenu1.makeMenu('010','01','&nbsp;Ingresar Curr�culum','/curriculum.asp?Nuevo=1&IDSubSeccion=10&URL=/AutoConsulta/Registracion/Default.asp|pnuevo=1','','128'); oCMenu1.makeMenu('011','01','&nbsp;Actualizar Curr�culum','/curriculum.asp?URL=/AutoConsulta/Registracion/Default.asp&IDSubSeccion=11','','128'); oCMenu1.makeMenu('025','01','&nbsp;Testimonios','/testimonios.asp?IDSubSeccion=25','','128'); oCMenu1.makeMenu('0141','01','&nbsp;Cursos gratuitos','/dicontenidos.asp?IDSubSeccion=141','','128'); oCMenu1.makeMenu('0178','0141','&nbsp;Orientaci�n laboral','/dicontenidos.asp?IDSubSeccion=178','','140'); oCMenu1.makeMenu('0181','0178','&nbsp;�C�mo buscar empleo?','/listadocapacitaciones.asp?IDSubSeccion=181','','200'); oCMenu1.makeMenu('0182','0178','&nbsp;Club de Empleo','/listadocapacitaciones.asp?IDSubSeccion=182','','200'); oCMenu1.makeMenu('0183','0178','&nbsp;Cyber Empleo','/listadocapacitaciones.asp?IDSubSeccion=183','','200'); oCMenu1.makeMenu('0179','0141','&nbsp;Capacitaci�n t�cnica','/dicontenidos.asp?IDSubSeccion=179','','140'); oCMenu1.makeMenu('0184','0179','&nbsp;Buenos Aires','/listadocapacitaciones.asp?IDSubSeccion=184','','200'); oCMenu1.makeMenu('0207','01','&nbsp;Postulantes Insertados','/postulantes/inserciones.asp?IDSubSeccion=207','','145'); oCMenu1.construct();oCMenu2= new makeCM('oCMenu2');oCMenu2.frames = 0;oCMenu2.fromLeft = 113;oCMenu2.fromTop = pos[1];oCMenu2.rows = 1;oCMenu2.menuPlacement = 0;oCMenu2.useBar = 0;oCMenu2.pxBetween = 0;oCMenu2.resizeCheck = 0;oCMenu2.wait = 30;oCMenu2.fillImg = 't.gif';oCMenu2.zIndex = 0;oCMenu2.barWidth = 600;oCMenu2.barHeight = 22;oCMenu2.barClass = 'clBar';oCMenu2.barX = 0;oCMenu2.barY = 0;oCMenu2.barBorderX = 0;oCMenu2.barBorderY = 0;oCMenu2.barBorderClass = '';oCMenu2.level[0]=new cm_makeLevel();oCMenu2.level[0].height=19;oCMenu2.level[0].regClass='clLevel0small2';oCMenu2.level[0].overClass='clLevel0small2';oCMenu2.level[0].borderX=0;oCMenu2.level[0].borderY=0;oCMenu2.level[0].borderClass='clLevel0small2border';oCMenu2.level[0].offsetX=0;oCMenu2.level[0].offsetY=-1;oCMenu2.level[0].rows=0;oCMenu2.level[0].align='bottom';oCMenu2.level[1]=new cm_makeLevel();oCMenu2.level[1].height=20;oCMenu2.level[1].regClass='clLevel1';oCMenu2.level[1].overClass='clLevel1over';oCMenu2.level[1].borderX=0;oCMenu2.level[1].borderY=0;oCMenu2.level[1].borderClass='clLevel1border';oCMenu2.level[1].offsetX=111;oCMenu2.level[1].offsetY=-17oCMenu2.level[1].rows=0;oCMenu2.level[1].align='bottom';oCMenu2.level[2]=new cm_makeLevel();oCMenu2.level[2].height=20;oCMenu2.level[2].regClass='clLevel2';oCMenu2.level[2].overClass='clLevel2over';oCMenu2.level[2].borderX=0;oCMenu2.level[2].borderY=0;oCMenu2.level[2].borderClass='clLevel2border';oCMenu2.level[2].offsetX=oCMenu2.level[1].offsetX + oCMenu2.level[1].width;oCMenu2.level[2].offsetY=-17;oCMenu2.level[2].rows=0;oCMenu2.level[2].align='bottom';oCMenu2.level[3]=new cm_makeLevel();oCMenu2.level[3].height=20;oCMenu2.level[3].regClass='clLevel3';oCMenu2.level[3].overClass='clLevel3over';oCMenu2.level[3].borderX=0;oCMenu2.level[3].borderY=0;oCMenu2.level[3].borderClass='clLevel3border';oCMenu2.level[3].offsetX=oCMenu2.level[2].offsetX + oCMenu2.level[2].width;oCMenu2.level[3].offsetY=-16;oCMenu2.level[3].rows=0;oCMenu2.level[3].align='bottom';oCMenu2.makeMenu('02','02','<center>Empresas</center>','','','72'); oCMenu2.makeMenu('013','02','&nbsp;Nuestros Servicios','','','112'); oCMenu2.makeMenu('0142','013','&nbsp;Selecci�n de personal','','','140'); oCMenu2.makeMenu('0210','0142','&nbsp;Servicio Premium','/dicontenidos.asp?IDSubSeccion=210','','200'); oCMenu2.makeMenu('0211','0142','&nbsp;Aviso Inteligente�','/dicontenidos.asp?IDSubSeccion=211','','200'); oCMenu2.makeMenu('0143','013','&nbsp;Evaluaci�n de personal','','','140'); oCMenu2.makeMenu('0212','0143','&nbsp;Evaluaci�n psicot�cnica','/dicontenidos.asp?IDSubSeccion=212','','200'); oCMenu2.makeMenu('0213','0143','&nbsp;Examen ambiental','/dicontenidos.asp?IDSubSeccion=213','','200'); oCMenu2.makeMenu('0214','0143','&nbsp;Examen m�dico preocupacional','/dicontenidos.asp?IDSubSeccion=214','','200'); oCMenu2.makeMenu('0215','0143','&nbsp;Evaluaci�n de desempe�o','/dicontenidos.asp?IDSubSeccion=215','','200'); oCMenu2.makeMenu('0163','013','&nbsp;Capacitaci�n','/dicontenidos.asp?IDSubSeccion=163','','140'); oCMenu2.makeMenu('0164','013','&nbsp;Encuestas de clima','/dicontenidos.asp?IDSubSeccion=164','','140'); oCMenu2.makeMenu('0193','013','&nbsp;Evaluaci�n de Office','/dicontenidos.asp?IDSubSeccion=193','','140'); oCMenu2.makeMenu('014','02','&nbsp;Pedidos On-line','/pedidos.asp?IDSubSeccion=14','','112'); oCMenu2.makeMenu('015','02','&nbsp;Actualidad Laboral','/Contenidos.asp?TIPOC=1&IDSubSeccion=15','','112'); oCMenu2.makeMenu('026','02','&nbsp;Testimonios','/testimonios.asp?IDSubSeccion=26','','112'); oCMenu2.makeMenu('0101','02','&nbsp;Nuestros Clientes','/dicontenidos.asp?IDSubSeccion=101','','150'); oCMenu2.makeMenu('0174','02','&nbsp;Cont�ctenos','/dicontenidos.asp?IDSubSeccion=174','','112'); oCMenu2.makeMenu('0209','02','&nbsp;RSE','/dicontenidos.asp?IDSubSeccion=209','','112'); oCMenu2.construct();oCMenu3= new makeCM('oCMenu3');oCMenu3.frames = 0;oCMenu3.fromLeft = 191;oCMenu3.fromTop = pos[1];oCMenu3.rows = 1;oCMenu3.menuPlacement = 0;oCMenu3.useBar = 0;oCMenu3.pxBetween = 0;oCMenu3.resizeCheck = 0;oCMenu3.wait = 30;oCMenu3.fillImg = 't.gif';oCMenu3.zIndex = 0;oCMenu3.barWidth = 600;oCMenu3.barHeight = 22;oCMenu3.barClass = 'clBar';oCMenu3.barX = 0;oCMenu3.barY = 0;oCMenu3.barBorderX = 0;oCMenu3.barBorderY = 0;oCMenu3.barBorderClass = '';oCMenu3.level[0]=new cm_makeLevel();oCMenu3.level[0].height=19;oCMenu3.level[0].regClass='clLevel0small3';oCMenu3.level[0].overClass='clLevel0small3';oCMenu3.level[0].borderX=0;oCMenu3.level[0].borderY=0;oCMenu3.level[0].borderClass='clLevel0small3border';oCMenu3.level[0].offsetX=0;oCMenu3.level[0].offsetY=-1;oCMenu3.level[0].rows=0;oCMenu3.level[0].align='bottom';oCMenu3.level[1]=new cm_makeLevel();oCMenu3.level[1].height=20;oCMenu3.level[1].regClass='clLevel1';oCMenu3.level[1].overClass='clLevel1over';oCMenu3.level[1].borderX=0;oCMenu3.level[1].borderY=0;oCMenu3.level[1].borderClass='clLevel1border';oCMenu3.level[1].offsetX=149;oCMenu3.level[1].offsetY=-17oCMenu3.level[1].rows=0;oCMenu3.level[1].align='bottom';oCMenu3.level[2]=new cm_makeLevel();oCMenu3.level[2].height=20;oCMenu3.level[2].regClass='clLevel2';oCMenu3.level[2].overClass='clLevel2over';oCMenu3.level[2].borderX=0;oCMenu3.level[2].borderY=0;oCMenu3.level[2].borderClass='clLevel2border';oCMenu3.level[2].offsetX=oCMenu3.level[1].offsetX + oCMenu3.level[1].width;oCMenu3.level[2].offsetY=-17;oCMenu3.level[2].rows=0;oCMenu3.level[2].align='bottom';oCMenu3.level[3]=new cm_makeLevel();oCMenu3.level[3].height=20;oCMenu3.level[3].regClass='clLevel3';oCMenu3.level[3].overClass='clLevel3over';oCMenu3.level[3].borderX=0;oCMenu3.level[3].borderY=0;oCMenu3.level[3].borderClass='clLevel3border';oCMenu3.level[3].offsetX=oCMenu3.level[2].offsetX + oCMenu3.level[2].width;oCMenu3.level[3].offsetY=-16;oCMenu3.level[3].rows=0;oCMenu3.level[3].align='bottom';oCMenu3.makeMenu('03','03','<center>Institucional</center>','','','95'); oCMenu3.makeMenu('0166','03','&nbsp;Qui�nes Somos','/dicontenidos.asp?IDSubSeccion=166','','150'); oCMenu3.makeMenu('0167','03','&nbsp;Acuerdo AMIA - BID','/dicontenidos.asp?IDSubSeccion=167','','150'); oCMenu3.makeMenu('0168','03','&nbsp;Socios del proyecto','/dicontenidos.asp?IDSubSeccion=168','','150'); oCMenu3.makeMenu('0169','03','&nbsp;Acuerdos Institucionales','','','180'); oCMenu3.makeMenu('0194','0169','&nbsp;Acuerdos Nacionales','/dicontenidos.asp?IDSubSeccion=194','','200'); oCMenu3.makeMenu('0195','0169','&nbsp;Sede Central','/dicontenidos.asp?IDSubSeccion=195','','200'); oCMenu3.makeMenu('0200','0169','&nbsp;Sede Rosario','/dicontenidos.asp?IDSubSeccion=200','','200'); oCMenu3.makeMenu('0202','0169','&nbsp;Sede Tucum�n','/dicontenidos.asp?IDSubSeccion=202','','200'); oCMenu3.makeMenu('0170','03','&nbsp;Prog. de Empleo Subsidiado','/dicontenidos.asp?IDSubSeccion=170','','180'); oCMenu3.makeMenu('0175','03','&nbsp;Plan Jefes y Jefas de Hogar','/dicontenidos.asp?IDSubSeccion=175','','180'); oCMenu3.makeMenu('0176','03','&nbsp;Staff','/dicontenidos.asp?IDSubSeccion=176','','150'); oCMenu3.construct();oCMenu4= new makeCM('oCMenu4');oCMenu4.frames = 0;oCMenu4.fromLeft = 292;oCMenu4.fromTop = pos[1];oCMenu4.rows = 1;oCMenu4.menuPlacement = 0;oCMenu4.useBar = 0;oCMenu4.pxBetween = 0;oCMenu4.resizeCheck = 0;oCMenu4.wait = 30;oCMenu4.fillImg = 't.gif';oCMenu4.zIndex = 0;oCMenu4.barWidth = 600;oCMenu4.barHeight = 22;oCMenu4.barClass = 'clBar';oCMenu4.barX = 0;oCMenu4.barY = 0;oCMenu4.barBorderX = 0;oCMenu4.barBorderY = 0;oCMenu4.barBorderClass = '';oCMenu4.level[0]=new cm_makeLevel();oCMenu4.level[0].height=19;oCMenu4.level[0].regClass='clLevel0small4';oCMenu4.level[0].overClass='clLevel0small4';oCMenu4.level[0].borderX=0;oCMenu4.level[0].borderY=0;oCMenu4.level[0].borderClass='clLevel0small4border';oCMenu4.level[0].offsetX=0;oCMenu4.level[0].offsetY=-1;oCMenu4.level[0].rows=0;oCMenu4.level[0].align='bottom';oCMenu4.level[1]=new cm_makeLevel();oCMenu4.level[1].height=20;oCMenu4.level[1].regClass='clLevel1';oCMenu4.level[1].overClass='clLevel1over';oCMenu4.level[1].borderX=0;oCMenu4.level[1].borderY=0;oCMenu4.level[1].borderClass='clLevel1border';oCMenu4.level[1].offsetX=139;oCMenu4.level[1].offsetY=-17oCMenu4.level[1].rows=0;oCMenu4.level[1].align='bottom';oCMenu4.level[2]=new cm_makeLevel();oCMenu4.level[2].height=20;oCMenu4.level[2].regClass='clLevel2';oCMenu4.level[2].overClass='clLevel2over';oCMenu4.level[2].borderX=0;oCMenu4.level[2].borderY=0;oCMenu4.level[2].borderClass='clLevel2border';oCMenu4.level[2].offsetX=oCMenu4.level[1].offsetX + oCMenu4.level[1].width;oCMenu4.level[2].offsetY=-17;oCMenu4.level[2].rows=0;oCMenu4.level[2].align='bottom';oCMenu4.level[3]=new cm_makeLevel();oCMenu4.level[3].height=20;oCMenu4.level[3].regClass='clLevel3';oCMenu4.level[3].overClass='clLevel3over';oCMenu4.level[3].borderX=0;oCMenu4.level[3].borderY=0;oCMenu4.level[3].borderClass='clLevel3border';oCMenu4.level[3].offsetX=oCMenu4.level[2].offsetX + oCMenu4.level[2].width;oCMenu4.level[3].offsetY=-16;oCMenu4.level[3].rows=0;oCMenu4.level[3].align='bottom';oCMenu4.makeMenu('04','04','<center>Actualidad laboral</center>','','','142'); oCMenu4.makeMenu('023','04','&nbsp;Notas de actualidad','/dicontenidos.asp?IDSubSeccion=23','','140'); oCMenu4.makeMenu('0110','04','&nbsp;Noticias','/dicontenidos.asp?IDSubSeccion=110','','140'); oCMenu4.makeMenu('0203','04','&nbsp;Newsletter empresas','/dicontenidos.asp?IDSubSeccion=203','','140'); oCMenu4.makeMenu('0204','04','&nbsp;Newsletter postulantes','/dicontenidos.asp?IDSubSeccion=204','','140'); oCMenu4.makeMenu('0208','04','&nbsp;Responsabilidad Social Empresaria','/dicontenidos.asp?IDSubSeccion=208','','140'); oCMenu4.construct();
+</script>

@@ -1,0 +1,60 @@
+
+<p class="error">
+	Campos con <span class="required">*</span> son obligatorios.
+</p>
+
+<?php echo $form->errorSummary($model); ?>
+
+<div class="contenedor-tabla">
+		
+	<div class="contenedor-fila">
+		<div class="contenedor-columna-30">
+		<?php echo $form->labelEx($model,'nombre'); ?>
+<?php echo $form->textField($model,'nombre',array('size'=>60,'maxlength'=>100)); ?>
+<?php echo $form->error($model,'nombre'); ?>
+	</div>	</div><div class="contenedor-fila">
+
+			<div class="contenedor-columna-30">
+		<?php echo $form->labelEx($model,'razon_social'); ?>
+<?php echo $form->textField($model,'razon_social',array('size'=>60,'maxlength'=>200)); ?>
+<?php echo $form->error($model,'razon_social'); ?>
+	</div>
+	</div>
+
+	<div class="contenedor-fila">
+		<div class="contenedor-columna-20">
+		<?php echo $form->labelEx($model,'codigo'); ?>
+<?php echo $form->textField($model,'codigo',array('size'=>6,'maxlength'=>6)); ?>
+<?php echo $form->error($model,'codigo'); ?>
+	</div>
+
+		<div class="contenedor-columna-30">
+		<?php echo $form->labelEx($model,'cuit'); ?>
+<?php echo $form->textField($model,'cuit'); ?>
+<?php echo $form->error($model,'cuit'); ?>
+	</div>
+
+	<div class="contenedor-columna-20">
+		<?php echo $form->labelEx($model,'inicio_actividad'); ?>
+<?php $this->widget('zii.widgets.jui.CJuiDatePicker',
+						 array(
+								 'model'=>'$model',
+								 'name'=>'Empresas[inicio_actividad]',
+								 //'language'=>'de',
+								 'value'=>$model->inicio_actividad,
+					'options' => array ( 
+       								'showButtonPanel' => true,
+									'changeYear' => true,
+									'changeYear' => true,
+									'showAnim'=>'fold', 
+							        'dateFormat'=>'yy-mm-dd' )  ,
+								 'htmlOptions'=>array('size'=>10, 'style'=>'width:80px !important'),
+								 )
+							 );
+					; ?>
+<?php echo $form->error($model,'inicio_actividad'); ?>
+	</div>
+	</div>
+
+
+</div>

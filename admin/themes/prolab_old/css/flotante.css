@@ -1,0 +1,62 @@
+#anuncio {
+	position: absolute;
+	border: 0px;
+	width: 40px;
+	height: 60px;
+	visibility: hidden;
+	z-index: 200;
+	top: 27px;
+	left: 5px;
+}
+
+#menu-top ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	height: 30px;
+}
+
+#menu-top ul li {
+	display: block;
+	height: 28px;
+	float: left;
+	overflow: visible;
+}
+
+#menu-top ul li:hover>ul {
+	display: block;
+}
+
+#menu-top ul li a {
+	float: left;
+	display: block;
+}
+
+#menu-top ul li ul li a {
+	color: #ccc;
+	padding: 4px 14px;
+	display: block;
+}
+
+#menu-top ul li ul li.active a,#menu-top ul li ul li a:hover {
+	color: rgb(99, 153, 205);
+}
+
+#mainmenu ul li a {
+	height: 30px;
+}
+
+#menu-top ul li ul {
+	background: none repeat scroll 0 0 #116689;
+	color: #FFFFFF;
+	display: none;
+	height: auto;
+	position: absolute;
+	top: 100%;
+	z-index: 500;
+}
+
+.portlet-content {
+	padding: 5px 2px;
+}

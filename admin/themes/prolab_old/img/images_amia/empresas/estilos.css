@@ -1,0 +1,526 @@
+BODY {
+	FONT-SIZE: 13px
+}
+
+.Botonera {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 13px;
+	COLOR: #09397e;
+	FONT-FAMILY: 'Trebuchet MS';
+	TEXT-DECORATION: none
+}
+
+.SubBotonera {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 11px;
+	COLOR: white;
+	FONT-FAMILY: 'Trebuchet MS';
+	TEXT-DECORATION: none
+}
+
+.Fecha {
+	FONT-SIZE: 10px;
+	COLOR: white;
+	FONT-FAMILY: Arial
+}
+
+.tit-caja {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	COLOR: #ecf1f6;
+	FONT-FAMILY: 'Trebuchet MS'
+}
+
+.txt-caja {
+	FONT-SIZE: 10px;
+	COLOR: #093b82;
+	FONT-FAMILY: Verdana
+}
+
+.Link {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 10px;
+	FONT-FAMILY: Verdana
+}
+
+.txt-Sede {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 10px;
+	COLOR: #d70072;
+	FONT-FAMILY: 'Trebuchet MS';
+	TEXT-DECORATION: none
+}
+
+.txt-Sede-Central {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 11px;
+	COLOR: #d70072;
+	FONT-FAMILY: 'Trebuchet MS';
+	TEXT-DECORATION: none
+}
+
+.footer-links {
+	FONT-SIZE: 11px;
+	COLOR: #09397e;
+	FONT-FAMILY: 'Trebuchet MS';
+	TEXT-DECORATION: none
+}
+
+.Titular {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 16px;
+	COLOR: #2469ac;
+	FONT-STYLE: italic;
+	FONT-FAMILY: 'Trebuchet MS'
+}
+
+.Titulo {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 16px;
+	TEXT-TRANSFORM: uppercase;
+	COLOR: #003366;
+	FONT-FAMILY: 'Trebuchet MS'
+}
+
+.ContenidoCuerpo {
+	FONT-SIZE: 12px;
+	COLOR: #003366;
+	FONT-FAMILY: Verdana
+}
+
+.TituloDocsRel {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 11px;
+	COLOR: #ffffff;
+	FONT-FAMILY: Verdana
+}
+
+.TituloCorte {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 12px;
+	COLOR: #89b2d9;
+	FONT-FAMILY: Trebuchet Ms
+}
+
+.TextoDocsRel {
+	FONT-SIZE: 10px;
+	COLOR: #003366;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.ContenidoCuerpoFaq {
+	FONT-SIZE: 13px;
+	COLOR: #06357a;
+	LINE-HEIGHT: 20px;
+	FONT-FAMILY: Verdana
+}
+
+.Leyenda-Faq {
+	FONT-SIZE: 13px;
+	COLOR: #06357a;
+	FONT-FAMILY: Verdana
+}
+
+.ContenidoCopeteListado {
+	FONT-SIZE: 10px;
+	COLOR: #003366;
+	FONT-FAMILY: Verdana
+}
+
+.ContenidoTitulo {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	COLOR: #003366;
+	FONT-FAMILY: 'Trebuchet MS'
+}
+
+.ContenidoTituloMayuscula {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	TEXT-TRANSFORM: uppercase;
+	COLOR: #003366;
+	FONT-FAMILY: 'Trebuchet MS'
+}
+
+.ContenidoTituloFaq {
+	FONT-SIZE: 12px;
+	COLOR: #06357a;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.ContenidoTitulo-Fecha {
+	FONT-SIZE: 10px;
+	COLOR: #003366;
+	FONT-FAMILY: Verdana
+}
+
+.ContenidoListado-Link {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 12px;
+	COLOR: #5288bc;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.tellfriend {
+	FONT-SIZE: 12px;
+	COLOR: #568bc0;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.tit-foros {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 12px;
+	COLOR: #ffffff;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.mensaje-tit {
+	FONT-SIZE: 12px;
+	COLOR: #568bc0;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.mensaje {
+	FONT-SIZE: 10px;
+	COLOR: #000000;
+	FONT-FAMILY: Verdana
+}
+
+.comentar-tit {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	COLOR: #ffffff;
+	FONT-FAMILY: 'Trebuchet MS'
+}
+
+.comentar-label {
+	FONT-SIZE: 10px;
+	COLOR: #003366;
+	FONT-FAMILY: Verdana
+}
+
+.comentar-field {
+	FONT-SIZE: 10px;
+	COLOR: #000000;
+	FONT-FAMILY: Verdana
+}
+
+.subtit {
+	FONT-SIZE: 12px;
+	COLOR: #003366;
+	FONT-FAMILY: Verdana
+}
+
+.emp-titarrow {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 12px;
+	COLOR: #ab005b;
+	FONT-FAMILY: 'Trebuchet MS';
+	TEXT-DECORATION: none
+}
+
+.linkpedidos {
+	FONT-SIZE: 10px;
+	COLOR: #2469ac;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.letraconfirmacion {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	COLOR: #2469ac;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.bot-Pedidos {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 12px;
+	COLOR: #5288bc;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.SedeCuerpo {
+	FONT-SIZE: 12px;
+	COLOR: #003366;
+	FONT-FAMILY: Verdana
+}
+
+.SedeEmail {
+	FONT-SIZE: 12px;
+	COLOR: #f10079;
+	FONT-FAMILY: Verdana
+}
+
+.SedeDenominacion {
+	FONT-SIZE: 12px;
+	COLOR: #003366;
+	FONT-FAMILY: Verdana
+}
+
+.txt-Usuario {
+	FONT-SIZE: 10px;
+	COLOR: #ffffff;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.map-seccion {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	TEXT-TRANSFORM: uppercase;
+	COLOR: #08367b;
+	FONT-FAMILY: 'Trebuchet MS';
+	TEXT-DECORATION: none
+}
+
+.map-subseccion {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 10px;
+	TEXT-TRANSFORM: uppercase;
+	COLOR: #08367b;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.map-provincias {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 10px;
+	COLOR: #08367b;
+	FONT-FAMILY: Verdana;
+	TEXT-DECORATION: none
+}
+
+.foot-links {
+	FONT-SIZE: 11px;
+	COLOR: #093a7d;
+	FONT-FAMILY: "Trebuchet MS";
+	TEXT-DECORATION: none
+}
+
+.foot-pridesc {
+	FONT-SIZE: 10px;
+	COLOR: #bb0164;
+	FONT-FAMILY: verdana;
+	TEXT-DECORATION: none
+}
+
+.foot-secdesc {
+	FONT-SIZE: 10px;
+	COLOR: #888888;
+	FONT-FAMILY: verdana;
+	TEXT-DECORATION: none
+}
+
+.TextoBotoneraHedaer {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 8px;
+	COLOR: #2467ab;
+	FONT-FAMILY: "Trebuchet MS";
+	TEXT-DECORATION: none
+}
+
+.ColorFondo {
+	BACKGROUND-COLOR: #d5e6f6
+}
+
+.TextoBotonera {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	COLOR: #ffffff;
+	FONT-FAMILY: "Trebuchet MS";
+	TEXT-DECORATION: none
+}
+
+.TextoBotoneraChica {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 12px;
+	COLOR: #ffffff;
+	FONT-FAMILY: "Trebuchet MS";
+	TEXT-DECORATION: none
+}
+
+.LetraFecha {
+	FONT-SIZE: 12px;
+	COLOR: #ffffff;
+	FONT-FAMILY: "Trebuchet MS"
+}
+
+.LetraSeccion {
+	FONT-SIZE: 12px;
+	COLOR: #ffffff;
+	FONT-FAMILY: "Trebuchet MS"
+}
+
+.ColorFondoSeleccion {
+	BACKGROUND-COLOR: #004890
+}
+
+.ColorFondoSinSeleccion {
+	BACKGROUND-COLOR: #5388bc
+}
+
+.cFondoSubBotonera {
+	BACKGROUND-COLOR: #669acc
+}
+
+.cSecciones {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	COLOR: #004a8e;
+	FONT-FAMILY: "Trebuchet MS";
+	TEXT-DECORATION: none
+}
+
+.FechaClass {
+	FONT-WEIGHT: bolder;
+	FONT-SIZE: 14px;
+	TEXT-TRANSFORM: uppercase;
+	COLOR: #ffffff;
+	FONT-STYLE: italic;
+	FONT-FAMILY: 'Trebuchet MS'
+}
+
+.LetraLogOut {
+	FONT-SIZE: 11px;
+	TEXT-TRANSFORM: uppercase;
+	COLOR: #ffffff;
+	FONT-STYLE: normal;
+	FONT-FAMILY: 'Trebuchet MS'
+}
+
+#Formulario {
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	PADDING-BOTTOM: 0px;
+	MARGIN: 0px;
+	PADDING-TOP: 0px
+}
+
+#CajaHomePrincipal {
+	BORDER-TOP: #f10180 1px solid;
+	MARGIN-TOP: 4px;
+	MARGIN-BOTTOM: 3px;
+	WIDTH: 774px;
+	BORDER-BOTTOM: #f10180 1px solid;
+	HEIGHT: 251px
+}
+
+#CajaTemas {
+	BACKGROUND-COLOR: #669acc
+}
+
+#CajaTemas SPAN.titulo {
+	PADDING-LEFT: 7px;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 11px;
+	TEXT-TRANSFORM: uppercase;
+	COLOR: #ffffff;
+	FONT-FAMILY: Arial
+}
+
+#CajaTemas DIV.tema {
+	BORDER-TOP: #ffffff 2px solid;
+	BACKGROUND-COLOR: #e4eef8
+}
+
+#CajaTemas DIV.tema A.titulo {
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	FONT-WEIGHT: normal;
+	FONT-SIZE: 11px;
+	PADDING-BOTTOM: 0px;
+	MARGIN: 0px 0px 0px 6px;
+	COLOR: #033480;
+	PADDING-TOP: 0px;
+	FONT-FAMILY: Arial;
+	TEXT-DECORATION: none
+}
+
+#CajaTemas DIV.tema A.titulo:hover {
+	COLOR: #6499cd
+}
+
+.Provincias {
+	MARGIN-TOP: 12px;
+	BACKGROUND: url(/Images/linea_punteada.gif) repeat-x 1px 76px
+}
+
+.ProvinciasUltima {
+	MARGIN-TOP: 8px;
+	WIDTH: 104px
+}
+
+.Provincias TABLE TD A {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	COLOR: #0b3c7e;
+	FONT-FAMILY: Trebuchet Ms;
+	TEXT-DECORATION: none
+}
+
+.ProvinciasUltima TABLE TD A {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	COLOR: #0b3c7e;
+	FONT-FAMILY: Trebuchet Ms;
+	TEXT-DECORATION: none
+}
+
+.Provincias TABLE TD A:hover {
+	TEXT-DECORATION: underline
+}
+
+.ProvinciasUltima TABLE TD A:hover {
+	TEXT-DECORATION: underline
+}
+
+.Provincias IMG.prov {
+	BORDER-RIGHT: #9ebad5 1px solid;
+	BORDER-TOP: #9ebad5 1px solid;
+	MARGIN-BOTTOM: 10px;
+	MARGIN-LEFT: 11px;
+	BORDER-LEFT: #9ebad5 1px solid;
+	BORDER-BOTTOM: #9ebad5 1px solid
+}
+
+.ProvinciasUltima IMG.prov {
+	BORDER-RIGHT: #9ebad5 1px solid;
+	BORDER-TOP: #9ebad5 1px solid;
+	MARGIN-BOTTOM: 10px;
+	MARGIN-LEFT: 11px;
+	BORDER-LEFT: #9ebad5 1px solid;
+	BORDER-BOTTOM: #9ebad5 1px solid
+}
+
+.Provincias IMG.flecha {
+	BORDER-RIGHT: #6885b0 1px solid;
+	BORDER-TOP: #6885b0 1px solid;
+	VERTICAL-ALIGN: middle;
+	BORDER-LEFT: #6885b0 1px solid;
+	BORDER-BOTTOM: #6885b0 1px solid
+}
+
+.ProvinciasUltima IMG.flecha {
+	BORDER-RIGHT: #6885b0 1px solid;
+	BORDER-TOP: #6885b0 1px solid;
+	VERTICAL-ALIGN: middle;
+	BORDER-LEFT: #6885b0 1px solid;
+	BORDER-BOTTOM: #6885b0 1px solid
+}
+
+.mensajeGracias {
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 16px;
+	COLOR: #003366;
+	FONT-FAMILY: Verdana;
+	TEXT-ALIGN: center
+}
